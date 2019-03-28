@@ -2,31 +2,35 @@
 import update from 'immutability-helper'
 
 // App Imports
-import { SET_TWEETS, FETCH_TWEETS_BEGIN, SET_TWEET, FETCH_TWEET_BEGIN } from '../actions/tweet'
+import {
+  HOME_GET_LATEST_QUESTIONS,
+  HOME_SET_LATEST_QUESTIONS,
+  HOME_GET_HOT_QUESTIONS,
+  HOME_SET_HOT_QUESTIONS
+} from "../actions/questions";
 
-export function tweets (state = {list: [], error: false, loading: false}, action = {}) {
+export function questions (state = {list: [], error: false, loading: false}, action = {}) {
   switch (action.type) {
-
-    case FETCH_TWEETS_BEGIN:
+    case HOME_GET_LATEST_QUESTIONS:
       return update(state, {
         $merge: {
           list: [],
           error: false,
           loading: true
         }
-      })
+      });
 
-    case SET_TWEETS:
+    case HOME_SET_LATEST_QUESTIONS:
       return update(state, {
         $merge: {
-          list: action.tweets,
+          list: action.questions,
           error: false,
           loading: false
         }
-      })
+      });
 
     default:
-      return state
+      return state;
   }
 }
 

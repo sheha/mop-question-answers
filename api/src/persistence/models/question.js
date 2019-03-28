@@ -1,5 +1,5 @@
 
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 
 const Schema = mongoose.Schema;
@@ -14,7 +14,7 @@ let QuestionSchema = new Schema({
     default: 0
   },
   answers: [{ type: Schema.Types.ObjectId, ref: "Answer" }],
-  _userId: { type: Schema.Types.ObjectId, ref: "User" },
+  userId: { type: Schema.Types.ObjectId, ref: "User" },
     created: {
         type: Date,
         default: Date.now
@@ -27,5 +27,5 @@ QuestionsSchema.method('like', function likes(like, cb) {
 
 });
 
-let Questions = mongoose.model("Question", QuestionsSchema);
-module.exports = Questions;
+let Question = mongoose.model("Question", QuestionSchema);
+module.exports = Question;

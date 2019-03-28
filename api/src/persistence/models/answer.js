@@ -1,5 +1,5 @@
 
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 
 const Schema = mongoose.Schema;
@@ -9,23 +9,13 @@ const AnswerSchema = new Schema({
     type: String,
         unique: true,
   },
-      likes: {
-          type: Number,
-          default: 0,
-
-    },
     created: {
         type: Date,
         default:Date.now
     },
-  _questionId: { type: Schema.Types.ObjectId, ref: "Question" },
-  _userId: { type: Schema.Types.ObjectId, ref: "User" }
+  questionId: { type: Schema.Types.ObjectId, ref: "Question" },
+  userId: { type: Schema.Types.ObjectId, ref: "User" }
 });
 
-AnswerSchema.method('like', function likes(like, cb) {
-    this.likes += 1;
-    this.parent().save(cb);
-
-});
 const Answer = mongoose.model("Answer", AnswerSchema);
 module.exports = Answer;

@@ -3,8 +3,9 @@ import jwtDecode from 'jwt-decode'
 
 // App Imports
 import config from '../config'
-
+//profile actions
 export const USER_CURRENT_SET = 'USER_CURRENT_SET'
+export const USER_CURRENT_ALL_QUESTIONS = "USER_CURRENT_ALL_QUESTIONS";
 
 export function postLogin (credentials) {
   return dispatch => {

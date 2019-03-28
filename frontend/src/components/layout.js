@@ -29,7 +29,7 @@ class Layout extends Component {
     return (
       <div>
         <AppBar
-          title=" <> QuestionsAnswers - Ismar"
+          title=" QuestionsAnswers"
           onLeftIconButtonClick={this.handleDrawerToggle}
           iconElementRight={isAuthenticated ? <UserButtonLogged/> : <UserButtonLogin/>}
         />
@@ -42,7 +42,7 @@ class Layout extends Component {
         >
           <MenuItem onClick={this.handleDrawerToggle} containerElement={<Link to="/"/>}><span role="img" aria-label="home">🏠</span> Home</MenuItem>
           <MenuItem onClick={this.handleDrawerToggle} containerElement={<Link to="/about"/>}><span role="img" aria-label="info">ℹ️</span> About</MenuItem>
-          
+
         </Drawer>
 
         {this.props.children}

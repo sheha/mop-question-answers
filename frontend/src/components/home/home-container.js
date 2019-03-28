@@ -4,11 +4,11 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 // App Imports
-import { fetchTweet } from '../../actions/tweet'
+import { fetchTweet } from '../../actions/questions'
 import Loading from '../loading'
 import TweetView from './view'
 
-class TweetViewContainer extends Component {
+class HomeContainer extends Component {
   componentDidMount () {
     this.props.fetchTweet(this.props.match.params.tweetId)
   }

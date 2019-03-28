@@ -20,16 +20,11 @@ let UserSchema = new Schema({
     type: String,
     required: true
   },
-  answered: {
-    type: Number,
-    default: 0
-    },
     createdAt: {
         type: Date,
         default: Date.now
     },
-  myQuestions: [{ type: Schema.Types.ObjectId, ref: "Question" }],
-    myAnswers: [{ type: Schema.Types.ObjectId, ref: "Answer" }]
+  myQuestions: [{ type: Schema.Types.ObjectId, ref: "Question" }]
 });
 // register every answer
 UserSchema.method('answer', function answering(answer, cb) {

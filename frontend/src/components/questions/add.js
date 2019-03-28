@@ -12,8 +12,8 @@ import TextField from 'material-ui/TextField'
 import { Card, CardText } from 'material-ui/Card'
 
 // App Imports
-import { postTweet } from '../../actions/tweet'
-import AuthRedirect from './../user/auth-redirect'
+import { postTweet } from '../../actions/questions'
+import AuthRedirect from '../user/auth-redirect'
 import Loading from '../loading'
 
 class TweetAdd extends Component {

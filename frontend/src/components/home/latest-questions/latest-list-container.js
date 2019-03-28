@@ -4,13 +4,13 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 // App Imports
-import { fetchTweets } from '../../actions/tweet'
-import Loading from '../loading'
-import TweetList from './list'
+import { fetchTweets } from '../../../actions/questions'
+import Loading from '../../loading'
+import TweetList from '../../my-questions/list'
 
-class TweetListContainer extends Component {
+class LatestQuestionsContainer extends Component {
   componentDidMount () {
-    this.props.fetchTweets()
+    //this.props.fetchTweets()
   }
 
   render () {
@@ -26,7 +26,7 @@ class TweetListContainer extends Component {
   }
 }
 
-TweetListContainer.propTypes = {
+LatestQuestionsContainer.propTypes = {
   tweets: PropTypes.object.isRequired,
   fetchTweets: PropTypes.func.isRequired
 }
@@ -37,4 +37,4 @@ function tweetsState (state) {
   }
 }
 
-export default connect(tweetsState, {fetchTweets})(TweetListContainer)
+export default connect(tweetsState, {fetchTweets})(LatestQuestionsContainer)
