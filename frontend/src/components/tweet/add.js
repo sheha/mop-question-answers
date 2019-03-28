@@ -33,7 +33,7 @@ class TweetAdd extends Component {
   onSubmit (event) {
     event.preventDefault()
 
-    console.log('E - submit #form-tweet')
+    console.log('add submit prevdefault')
 
     this.setState({isLoading: true})
 

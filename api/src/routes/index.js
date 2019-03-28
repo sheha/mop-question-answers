@@ -1,12 +1,10 @@
-// src / routes / index.js
 'use strict'
 
-// Imports
 const express = require('express')
 
 let authMiddleware = require('./middlewares/auth')
 
-// Common Routes
+
 let commonRoutes = express.Router()
 
 // Root
