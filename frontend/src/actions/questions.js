@@ -35,7 +35,7 @@ export function fetchLatestQuestions (skip) {
           if (response.data.length > 0) {
             dispatch({
               type: HOME_SET_LATEST_QUESTIONS,
-              questions: response.data
+              latestQuestions: response.data
             });
           }
         })
@@ -60,7 +60,7 @@ export function fetchHotQuestions(skip) {
           if (response.data.length > 0) {
             dispatch({
               type: HOME_SET_HOT_QUESTIONS,
-              questions: response.data
+              hotQuestions: response.data
             });
           }
         })
