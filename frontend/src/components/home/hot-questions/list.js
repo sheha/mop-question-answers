@@ -7,28 +7,28 @@ import moment from 'moment'
 // UI Imports
 import { Card, CardTitle } from 'material-ui/Card'
 
-function TweetList ({tweets}) {
+function HotQuestionsList ({questions}) {
   const emptyMessage = (
     <p>No tweets to show.</p>
   )
 
-  const tweetsList = (
-    tweets.map(({_id, text, createdAt}) => (
+  const questionsList = (
+    questions.map(({_id, question, answers, created, user}) => (
       <Card key={_id}>
-        <Link to={`/tweet/${ _id }`}><CardTitle title={text} subtitle={moment(createdAt).fromNow()}/></Link>
+        <Link to={`/questions/${ _id }`}><CardTitle title={question} subtitle={moment(created).fromNow()}/></Link>
       </Card>
     ))
   )
 
   return (
     <div>
-      {tweets.length === 0 ? emptyMessage : tweetsList}
+      {questions.length === 0 ? emptyMessage : questionsList}
     </div>
   )
 }
 
-TweetList.propTypes = {
-  tweets: PropTypes.array.isRequired
+HotQuestionsList.propTypes = {
+  questions: PropTypes.array.isRequired
 }
 
-export default TweetList
+export default HotQuestionsList

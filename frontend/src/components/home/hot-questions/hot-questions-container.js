@@ -4,58 +4,57 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 // App Imports
-//import { fetchTweets } from '../../actions/tweet'
+import { fetchHotQuestions } from '../../../actions/questions';
 import Loading from '../../loading'
-import TweetList from '../../my-questions/list'
+import QuestionsList from './list'
+
+import {SimpleListItem, SimpleExpansionPanel} from '../../common'
 
 class HotQuestionsContainer extends Component {
     constructor (props) {
         super(props);
         this.state = {
+            //initial state for load more 
             skip: 0
         };
     }
     componentDidMount() {
-        this.props.fetchHotQuestions(this.state.skip)
-        this.setState({skip:this.state.skip + 20})
+        this.props.fetchHotQuestions(this.state.skip);
+        this.setState({skip:this.state.skip + 20});
     }
 
-    // sumFetched(hotQuestions) {
-    //     return hotQuestions.reduce(
-    //         (a, b) => {
-    //             return a.votes + b.votes;
-    //         }
-    //     )
-    // }
 
     loadMore(skip) {
         this.props.fetchHotQuestions(skip);
         const nextSkip = this.state.skip + 20;
         this.setState({ skip: nextSkip });
     }
+    onLoadMoreClick(event){
+        event.preventDefault();
+        this.loadMore(this.state.skip);
+    }
 
     render() {
+        let {questions} = this.props;
         return (
+            
+           
             <section>
-                <h2><span role="img" aria-label="tweets">💭</span> Hot Questions List</h2>
-
-                <br />
-
-                {this.props.questions.loading ? <Loading /> : <TweetList tweets={this.props.questions.list} />}
+                {this.props.questions.loading ? <Loading /> : <SimpleExpansionPanel itemColl={questions} />}
             </section>
         )
     }
 }
 
-HottestQuestionsListContainer.propTypes = {
-    tweets: PropTypes.object.isRequired,
-    fetchTweets: PropTypes.func.isRequired
+HotQuestionsContainer.propTypes = {
+    questions: PropTypes.object.isRequired,
+    fetchHotQuestions: PropTypes.func.isRequired
 }
 
-function tweetsState(state) {
+function questionsState(state) {
     return {
-        tweets: state.tweets
+        questions: state.questions
     }
 }
 
-export default connect(tweetsState, { fetchTweets })(HotQuestionsContainer)
+export default connect(questionsState, { fetchHotQuestions })(HotQuestionsContainer)

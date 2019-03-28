@@ -9,7 +9,7 @@ import {
   HOME_SET_HOT_QUESTIONS
 } from "../actions/questions";
 
-export function questions (state = {list: [], error: false, loading: false}, action = {}) {
+export function latestQuestions (state = {list: [], error: false, loading: false}, action = {}) {
   switch (action.type) {
     case HOME_GET_LATEST_QUESTIONS:
       return update(state, {
@@ -34,28 +34,28 @@ export function questions (state = {list: [], error: false, loading: false}, act
   }
 }
 
-export function tweet (state = {details: {}, error: false, loading: false}, action = {}) {
+export function hotQuestions (state = {list: [], error: false, loading: false}, action = {}) {
   switch (action.type) {
-
-    case FETCH_TWEET_BEGIN:
+    case HOME_GET_HOT_QUESTIONS:
       return update(state, {
         $merge: {
-          details: {},
+          list: [],
           error: false,
           loading: true
         }
-      })
+      });
 
-    case SET_TWEET:
+    case HOME_SET_HOT_QUESTIONS:
       return update(state, {
         $merge: {
-          details: action.tweet,
+          list: action.questions,
           error: false,
           loading: false
         }
-      })
+      });
 
     default:
-      return state
+      return state;
   }
 }
+

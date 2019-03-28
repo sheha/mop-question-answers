@@ -4,19 +4,15 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 // App Imports
-import { fetchTweet } from '../../actions/questions'
 import Loading from '../loading'
 import TweetView from './view'
 
 class HomeContainer extends Component {
-  componentDidMount () {
-    this.props.fetchTweet(this.props.match.params.tweetId)
-  }
 
   render () {
     return (
       <section>
-        <h2><span role="img" aria-label="tweet">💭</span> Tweet</h2>
+        <h2> HOME-CONTAINER</h2>
 
         <br/>
 
@@ -26,7 +22,7 @@ class HomeContainer extends Component {
   }
 }
 
-TweetViewContainer.propTypes = {
+HomeContainer.propTypes = {
   tweet: PropTypes.object.isRequired,
   fetchTweet: PropTypes.func.isRequired
 }

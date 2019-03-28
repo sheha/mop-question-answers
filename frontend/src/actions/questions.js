@@ -20,8 +20,8 @@ export const QUESTIONS_SET_ALL_A = "QUESTIONS_SET_ALL_A";
 
 
 
-export const SET_TWEET = 'SET_TWEET'
-export const FETCH_TWEET_BEGIN = 'FETCH_TWEET_BEGIN'
+export const SET_QUESTION = 'SET_QUESTION'
+export const GET_QUESTION = 'GET_QUESTION'
 
 export function fetchLatestQuestions (skip) {
   return dispatch => {
@@ -29,7 +29,7 @@ export function fetchLatestQuestions (skip) {
       type: HOME_GET_LATEST_QUESTIONS
     });
 
-    return fetch(`/questions/${skip}`).then(function (response) {
+    return fetch(`/questions/latest/${skip}`).then(function (response) {
       if (response.ok) {
         response.json().then(function (response) {
           if (response.data.length > 0) {
@@ -54,7 +54,7 @@ export function fetchHotQuestions(skip) {
       type: HOME_GET_HOT_QUESTIONS
     });
 
-    return fetch(`/questions/${skip}`).then(function (response) {
+    return fetch(`/questions/hot/${skip}`).then(function (response) {
       if (response.ok) {
         response.json().then(function (response) {
           if (response.data.length > 0) {
@@ -73,19 +73,19 @@ export function fetchHotQuestions(skip) {
   }
 }
 
-export function fetchTweet (tweetId) {
+export function fetchQuestion (questionId) {
   return dispatch => {
     dispatch({
-      type: FETCH_TWEET_BEGIN
+      type: GET_QUESTION
     })
 
-    return fetch(`${ config.url.api }tweet/${ tweetId }`).then(function (response) {
+    return fetch(`${ config.url.api }question/${ questionId }`).then(function (response) {
       if (response.ok) {
         response.json().then(function (response) {
           if (response.success) {
             dispatch({
-              type: SET_TWEET,
-              tweet: response.data
+              type: SET_QUESTION,
+              question: response.data
             })
           }
         })
@@ -98,14 +98,32 @@ export function fetchTweet (tweetId) {
   }
 }
 
-export function postTweet (tweet) {
+export function postQuestion (question) {
   const token = localStorage.getItem('token')
 
   return dispatch => {
-    return fetch(`${ config.url.api }tweet/add`, {
+    return fetch(`${ config.url.api }question/add`, {
       method: 'post',
 
-      body: JSON.stringify(tweet),
+      body: JSON.stringify(question),
+
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': token
+      }
+    })
+      .then(response => response.json())
+  }
+}
+
+export function postAnswer (question) {
+  const token = localStorage.getItem('token')
+
+  return dispatch => {
+    return fetch(`${ config.url.api }question/answer`, {
+      method: 'post',
+
+      body: JSON.stringify(question),
 
       headers: {
         'Content-Type': 'application/json',

@@ -15,13 +15,13 @@ let Question = require('../persistence/models/question');
 let questionRoutes = express.Router()
 
 
-questionRoutes.get('/questions/:skip/:latest/:hot/', authMiddleware, (request, response) => {
+questionRoutes.get('/questions/latest/:skip', authMiddleware, (request, response) => {
   let responseData = {
     success: false,
     data: {},
     errors: []
   }
-  if (request.params.latest) {
+
     Question.find({}).sort({ created: -1 }).skip(parseInt(request.params.skip)).exec(function (error, documents) {
       if (documents.length > 0) {
         responseData.data = documents
@@ -31,8 +31,15 @@ questionRoutes.get('/questions/:skip/:latest/:hot/', authMiddleware, (request, r
       response.json(responseData)
     })
 
+})
+
+questionRoutes.get('/questions/hot/:skip', authMiddleware, (request, response) => {
+  let responseData = {
+    success: false,
+    data: {},
+    errors: []
   }
-  else if (request.params.hot) {
+
     Question.find({}).sort({ likes: -1 }).skip(parseInt(request.params.skip)).exec(function (error, documents) {
       if (documents.length > 0) {
         responseData.data = documents
@@ -41,24 +48,6 @@ questionRoutes.get('/questions/:skip/:latest/:hot/', authMiddleware, (request, r
 
       response.json(responseData)
     })
-  }
-  else {
-    response.json(responseData);
-
-  }
-
-
-
-
-  // Question.find({}).sort({ created: -1 }).exec(function (error, documents) {
-  //   if (documents.length > 0) {
-  //     responseData.data = documents
-  //     responseData.success = true
-  //   }
-
-  //   response.json(responseData)
-  // })
-
 
 })
 
@@ -105,7 +94,49 @@ questionRoutes.post('/questions/add', authMiddleware, (request, response) => {
   }
 })
 
-// Single Tweets (/tweet/tweetId)
+questionRoutes.post('/questions/answer', authMiddleware, (request, response) => {
+  let responseData = {
+    success: false,
+    data: {},
+    errors: []
+  }
+
+  if (!isEmpty(request.user)) {
+    if (request.body.text != '') {
+      let question = {
+        question: request.body.text,
+        userId: request.user._id,
+        created: Date.now()
+      }
+
+      Question.create(question, (error, document) => {
+        if (error) {
+          responseData.errors.push({type: 'critical', message: error})
+        } else {
+          let questionId = document._id
+
+          if (questionId) {
+            responseData.data.questionId = questionId
+            responseData.success = true
+          } else {
+            responseData.errors.push({type: 'default', message: 'Please try again.'})
+          }
+        }
+
+        response.json(responseData)
+      })
+    } else {
+      responseData.errors.push({type: 'warning', message: 'Please enter question.'})
+
+      response.json(responseData)
+    }
+  } else {
+    responseData.errors.push({type: 'critical', message: 'You are not signed in. Please sign in to post a question.'})
+
+    response.json(responseData)
+  }
+})
+
 questionRoutes.get('/questions/:questionId', authMiddleware, (request, response) => {
   let responseData = {
     success: false,
