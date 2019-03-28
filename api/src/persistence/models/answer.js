@@ -27,5 +27,5 @@ AnswerSchema.method('like', function likes(like, cb) {
     this.parent().save(cb);
 
 });
-const Answer = mongoose.model("Answers", AnswerSchema);
+const Answer = mongoose.model("Answer", AnswerSchema);
 module.exports = Answer;

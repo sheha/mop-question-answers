@@ -1,10 +1,10 @@
-import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
+const mongoose=require('mongoose');
+//const bcrypt from 'bcrypt';
 
 
-const Schema = mongoose.Schema;
+let Schema = mongoose.Schema;
 
-const UserSchema = new Schema({
+let UserSchema = new Schema({
     name: { type: String,required:'First name cannot be empty'},
   email: {
     type: String,
@@ -28,8 +28,8 @@ const UserSchema = new Schema({
         type: Date,
         default: Date.now
     },
-  myQuestions: [{ type: Schema.Types.ObjectId, ref: "Questions" }],
-    myAnswers: [{ type: Schema.Types.ObjectId, ref: "Answers" }]
+  myQuestions: [{ type: Schema.Types.ObjectId, ref: "Question" }],
+    myAnswers: [{ type: Schema.Types.ObjectId, ref: "Answer" }]
 });
 // register every answer
 UserSchema.method('answer', function answering(answer, cb) {
@@ -37,31 +37,31 @@ UserSchema.method('answer', function answering(answer, cb) {
     this.parent().save(cb);
 })
 // hash password before saving
-UserSchema.pre('save', (next) => {
-    var user = this;
-    if (this.isModified('password') || this.isNew) {
-        bcrypt.genSalt(10, (err, salt) => {
-            if (err) { return next(err); }
-            bcrypt.hash(user.password, salt, (err, hash) => {
-                if (err) {
-                    return next(err);
-                }
-                user.password = hash;
-                next();
-            });
-        });
+// UserSchema.pre('save', (next) => {
+//     var user = this;
+//     if (this.isModified('password') || this.isNew) {
+//         bcrypt.genSalt(10, (err, salt) => {
+//             if (err) { return next(err); }
+//             bcrypt.hash(user.password, salt, (err, hash) => {
+//                 if (err) {
+//                     return next(err);
+//                 }
+//                 user.password = hash;
+//                 next();
+//             });
+//         });
 
-    }
-    else {
-        return next();
-    }
-});
-//compare hashed passwords
-UserSchema.methods.comparePassword = function (pw, cb) {
-    bcrypt.compare(pw, this.password, (err, isMatch) => {
-        if (err) { return cb(err); }
-        cb(null, isMatch);
-    });
-};
-const User = mongoose.model('User', UserSchema);
+//     }
+//     else {
+//         return next();
+//     }
+// });
+// //compare hashed passwords
+// UserSchema.methods.comparePassword = function (pw, cb) {
+//     bcrypt.compare(pw, this.password, (err, isMatch) => {
+//         if (err) { return cb(err); }
+//         cb(null, isMatch);
+//     });
+// };
+let User = mongoose.model('User', UserSchema);
 module.exports = User;

@@ -1,5 +1,5 @@
 // App Imports
-import config from '../config'
+import config from '../config/index'
 
 export const SET_TWEETS = 'SET_TWEETS'
 export const FETCH_TWEETS_BEGIN = 'FETCH_TWEETS_BEGIN'
@@ -12,7 +12,8 @@ export function fetchTweets () {
       type: FETCH_TWEETS_BEGIN
     })
 
-    return fetch(`${ config.url.api }tweets`).then(function (response) {
+    return fetch('/tweets').then(function (response) {
+      console.log(response);
       if (response.ok) {
         response.json().then(function (response) {
           if (response.data.length > 0) {

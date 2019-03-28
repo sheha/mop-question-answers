@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "dotenv": "^7.0.0",
     "immutability-helper": "3.0.0",
     "jwt-decode": "^2.1.0",
     "lodash": "4.17.11",
@@ -27,7 +28,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:5001",
+
   "browserslist": [
     ">0.2%",
     "not dead",

@@ -8,7 +8,6 @@ const isEmpty = require('lodash/isEmpty')
 // App Imports
 const config = require('./../config')
 let authMiddleware = require('./middlewares/auth')
-let Tweet = require('../models/tweet')
 
 // Common Routes
 let tweetRoutes = express.Router()

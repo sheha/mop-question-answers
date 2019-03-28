@@ -11,7 +11,7 @@ const dbconn = require('./persistence/dbconn')
 const config = require('./config')
 let commonRoutes = require('./routes')
 let userRoutes = require('./routes/user')
-//let tweetRoutes = require('./routes/tweet')
+let tweetRoutes = require('./routes/tweet')
 
 // Setup
 let apiServer = express()
@@ -21,9 +21,14 @@ apiServer.set('APP_SECRET', config.secret)
 dbconn();
 
 // Enable CORS
-apiServer.use(cors())
+// apiServer.use(cors())
+apiServer.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 //provide stack trace with errors
-app.use((err, req, res, next) => {
+apiServer.use((err, req, res, next) => {
     res.status(err.status || 500).json({
         error: {
             message: err.message,
@@ -42,7 +47,7 @@ apiServer.use(cookieParser())
 // Routes
 apiServer.use(commonRoutes)
 apiServer.use(userRoutes)
-apiServer.use(tweetRoutes)
+//apiServer.use(tweetRoutes)
 
 // Export
 module.exports = apiServer

@@ -1,14 +1,15 @@
 const  mongoose=require('mongoose');
 const config = require('../config/index');
-
+// handles unhandled promise rejection between app and mongod
+mongoose.Promise = global.Promise;
 // connect / reconnect
 const connect = async () => {
     try {
-        await mongoose.connect(environment.DB_URL, { useCreateIndex: true, useNewUrlParser: true });
+        await mongoose.connect(config.DB_URL, { useCreateIndex: true, useNewUrlParser: true });
         console.log('Database connection established!')
     } catch (e) {
-        await mongoose.createConnection(environment.DB_URL);
+        await mongoose.createConnection(config.DB_URL);
     }
 }
 
-export default connect;
+module.exports = connect;

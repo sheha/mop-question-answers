@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt')
 
 const config = require('./../config')
 let authMiddleware = require('./middlewares/auth')
-let User = require('../models/user')
+let User = require('../persistence/models/user')
 
 // Common Routes
 let userRoutes = express.Router()
