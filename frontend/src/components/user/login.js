@@ -32,7 +32,7 @@ class UserLogin extends Component {
   onSubmit (event) {
     event.preventDefault()
 
-    console.log('E - submit #form-tweet')
+    console.log('E - submit #form-user')
 
     let input = {}
     input.username = this.state.username
@@ -84,13 +84,25 @@ class UserLogin extends Component {
       <section>
         <h2>Login</h2>
 
-        <br/>
+        <br />
 
-        {this.state.error ? <Card><CardText color={red500}>{this.state.error}</CardText></Card> : ''}
+        {this.state.error ? (
+          <Card>
+            <CardText color={red500}>{this.state.error}</CardText>
+          </Card>
+        ) : (
+          ""
+        )}
 
-        {this.state.message ? <Card><CardText color={blue500}>{this.state.message}</CardText></Card> : ''}
+        {this.state.message ? (
+          <Card>
+            <CardText color={blue500}>{this.state.message}</CardText>
+          </Card>
+        ) : (
+          ""
+        )}
 
-        <form id="form-tweet" onSubmit={this.onSubmit.bind(this)}>
+        <form id="form-user" onSubmit={this.onSubmit.bind(this)}>
           <TextField
             name="username"
             value={this.state.username}
@@ -108,12 +120,16 @@ class UserLogin extends Component {
             fullWidth={true}
           />
 
-          <br/>
-          <br/>
+          <br />
+          <br />
 
-          <Button label="Submit" type="submit" backgroundColor={blue500} />
+          <Button type="submit" backgroundColor={blue500}>
+            Submit
+          </Button>
 
-          <Link to="/user/register"><Button label="Register"/></Link>
+          <Link to="/user/register">
+            <Button>Register</Button>
+          </Link>
         </form>
 
         <Snackbar
@@ -128,9 +144,9 @@ class UserLogin extends Component {
           autoHideDuration={2000}
         />
 
-        {this.state.logged ? <Redirect to="/tweet/add"/> : ''}
+        {this.state.logged ? <Redirect to="/tweet/add" /> : ""}
       </section>
-    )
+    );
   }
 }
 

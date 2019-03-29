@@ -70,7 +70,7 @@ class TweetAdd extends Component {
 
         {this.state.message ? <Card><CardText color={blue500}>{this.state.message}</CardText></Card> : ''}
 
-        <form id="form-tweet" onSubmit={this.onSubmit.bind(this)}>
+        <form id="form-add" onSubmit={this.onSubmit.bind(this)}>
           <TextField
             name="text"
             value={this.state.text}

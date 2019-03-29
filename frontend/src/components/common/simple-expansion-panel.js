@@ -51,7 +51,6 @@ function SimpleExpansionPanel(props) {
 
 SimpleExpansionPanel.propTypes = {
   classes: PropTypes.object.isRequired,
-  itemsColl:PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(SimpleExpansionPanel);

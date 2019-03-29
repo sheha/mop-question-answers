@@ -8,7 +8,7 @@ import thunk from 'redux-thunk'
 import jwtDecode from 'jwt-decode'
 
 // UI Imports
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import { MuiThemeProvider , createMuiTheme} from '@material-ui/core/styles';
 
 // App Imports
 //import registerServiceWorker from './registerServiceWorker'
@@ -17,6 +17,17 @@ import rootReducer from './reducers/root'
 import App from './app'
 import './index.css'
 
+// theme is a required proptype for new material-ui
+const theme = createMuiTheme(
+  {
+    typography: {  // fix for outdated typography elements
+      useNextVariants: true,
+    },
+    palette: {
+      type: 'dark',
+    },
+  }
+);
 // Store
 const store = createStore(
   rootReducer,
@@ -35,7 +46,7 @@ if (token && token !== 'undefined' && token !== '') {
 // Render App
 ReactDOM.render(
   <Provider store={store}>
-    <MuiThemeProvider>
+    <MuiThemeProvider theme={theme}>
       <Router>
         <App/>
       </Router>
