@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 
 // UI Imports
 import Snackbar from '@material-ui/Snackbar'
-import RaisedButton from '@material-ui/RaisedButton'
+import Button from '@material-ui/core/Button'
 import { blue500, red500 } from '@material-ui/styles/colors'
 import TextField from '@material-ui/TextField'
 import { Card, CardText } from '@material-ui/Card'
@@ -75,7 +75,7 @@ class TweetAdd extends Component {
             name="text"
             value={this.state.text}
             onChange={this.onChange.bind(this)}
-            floatingLabelText="What's happening?"
+            label="What's happening?"
             multiLine={true}
             rows={1}
             fullWidth={true}
@@ -84,7 +84,7 @@ class TweetAdd extends Component {
           <br/>
           <br/>
 
-          {this.state.isLoading ? <Loading/> : <RaisedButton label="🐤 Submit" type="submit" backgroundColor={blue500} />}
+          {this.state.isLoading ? <Loading/> : <Button  type="submit" color="secondary" >Submit</Button>}
         </form>
 
         <Snackbar
