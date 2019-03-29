@@ -6,14 +6,11 @@ import PropTypes from 'prop-types'
 
 // UI Imports
 import AppBar from '@material-ui/core/AppBar'
-import Drawer from '@material-ui/core/Drawer'
-import MenuItem from '@material-ui/core/MenuItem'
 
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 
 import Button from "@material-ui/core/Button";
-import MenuIcon from "@material-ui/icons/Menu";
 
 import UserButtonLogin from './user/button/login'
 import UserButtonLogged from './user/button/logged'
@@ -23,11 +20,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 
 //main layout theme styles setup
 const styles = theme => ({
-  '@global': {
-    body: {
-      backgroundColor: theme.palette.common.white,
-    },
-  },
+
 
   root: { flexGrow: 1 },
   grow: { flexGrow: 1 },
@@ -53,9 +46,7 @@ const styles = theme => ({
     margin: '0 auto',
     padding: `${theme.spacing.unit * 8}px 0 ${theme.spacing.unit * 6}px`,
   },
-  heroButtons: {
-    marginTop: theme.spacing.unit * 4,
-  },
+
 
   main: {
     width: 'auto',
@@ -105,7 +96,7 @@ class Layout extends Component {
         <CssBaseline />
         <AppBar
           position="static"
-          color="default"
+          color="primary"
           className={classes.appBar}
         >
           <Toolbar>
@@ -118,9 +109,9 @@ class Layout extends Component {
               Questionairre
             </Typography>
 
-            <Button>Features</Button>
-            <Button>Enterprise</Button>
-            <Button>Support</Button>
+            <Button color="secondary">Home</Button>
+            <Button color="secondary">Questions</Button>
+            <Button color="secondary">Profile</Button>
             {isAuthenticated ? <UserButtonLogged /> : <UserButtonLogin />}
           </Toolbar>
         </AppBar>

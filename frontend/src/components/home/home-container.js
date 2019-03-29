@@ -6,7 +6,7 @@ import { withStyles } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 // App Imports
-import HotQuestionsContainer from '../home/hot-questions/hot-questions-container';
+import HotQuestionsContainer from './hot-questions/hot-questions-container';
 import Loading from '../loading'
 
 const styles = theme => ({
@@ -19,12 +19,14 @@ const styles = theme => ({
       .spacing.unit * 3}px`
   },
   heroUnit: {
-    backgroundColor: theme.palette.background.paper
+    marginTop: 20,
+    padding:20,
+    backgroundColor: theme.palette.background.paper,
+    height:"100%"
   },
   heroContent: {
     maxWidth: 600,
-    margin: "0 auto",
-    padding: `${theme.spacing.unit * 8}px 0 ${theme.spacing.unit * 6}px`
+    margin: "0 auto"
   },
 });
 
@@ -37,19 +39,20 @@ class HomeViewContainer extends Component {
       <React.Fragment>
       <div className={classes.heroUnit}>
         <div className={classes.heroContent}>
-          <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-            Questions and Answers
+          <Typography component="h1" variant="h5" align="center" color="textPrimary" gutterBottom>
+            Home Page
             </Typography>
           <Typography variant="h6" align="center" color="textSecondary" paragraph>
-            Assignment
+            Display wrapper around Latest Answers, Hot Questions, Most Active Users components.
             </Typography>
 
         </div>
-        </div>
+
         <Paper className={classes.paper}>
 
         <HotQuestionsContainer />
-        </Paper>
+          </Paper>
+        </div>
         </React.Fragment>
     );
   }

@@ -218,7 +218,7 @@ class UserRegister extends Component {
                   Submit
                 </Button>
 
-                <Link to="/user/register">
+                <Link to="/user/login">
                   <Button>Login</Button>
                 </Link>
               </form>

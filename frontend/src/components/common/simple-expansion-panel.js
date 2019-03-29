@@ -16,15 +16,16 @@ const styles = theme => ({
     width: '100%',
   },
   heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightBold,
+    fontSize: theme.typography.pxToRem(13),
+    fontWeight: theme.typography.fontWeightRegular,
   },
 });
 
 function SimpleExpansionPanel(props) {
-  const { classes, itemsColl } = props;
+  let { classes, itemsColl, label } = props;
+  label = "Hot Questions"
   const displayItems = itemsColl && itemsColl.map(({ _id, question, answers, created, user }) => (
-    <SimpleListItem key={_id} displayItem={question}>
+    <SimpleListItem key={_id} question={question} created={created} user={user}>
 
     </SimpleListItem>
   ))
@@ -32,11 +33,10 @@ function SimpleExpansionPanel(props) {
     <div className={classes.root}>
       <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<ExpandMore />}>
-          <Typography className={classes.heading}>Expansion Panel 1</Typography>
+          <Typography className={classes.heading}>{label}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <List
-            subheader={<ListSubheader component="div">LATEST QUESTIONS</ListSubheader>}
             className={classes.root}
           >
             {displayItems}

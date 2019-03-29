@@ -18,15 +18,47 @@ import rootReducer from './reducers/root'
 import App from './app'
 import './index.css'
 
-// theme is a required proptype for new material-ui
+// theme is a required proptype for new material-ui,
+// make our own while at it
 const theme = createMuiTheme(
   {
     typography: {  // fix for outdated typography elements
       useNextVariants: true,
     },
     palette: {
-      type: 'dark',
-    },
+      "common": {
+        "black": "rgba(110, 107, 107, 1)",
+        "white": "rgba(215, 255, 255, 1)"
+      },
+      "background": {
+        "paper": "rgba(239, 242, 244, 1)",
+        "default": "rgba(184, 186, 181, 1)"
+      },
+      "primary": {
+        "light": "rgba(140, 140, 140, 1)",
+        "main": "rgba(66, 69, 66, 1)",
+        "dark": "rgba(51, 169, 103, 1)",
+        "contrastText": "rgba(246, 157, 9, 1)"
+      },
+      "secondary": {
+        "light": "#ff4081",
+        "main": "rgba(234, 151, 28, 1)",
+        "dark": "#c51162",
+        "contrastText": "#fff"
+      },
+      "error": {
+        "light": "#e57373",
+        "main": "rgba(196, 26, 13, 1)",
+        "dark": "#d32f2f",
+        "contrastText": "#fff"
+      },
+      "text": {
+        "primary": "rgba(19, 16, 16, 1)",
+        "secondary": "rgba(245, 166, 35, 100)",
+        "disabled": "rgba(0, 0, 0, 0.38)",
+        "hint": "rgba(0, 0, 0, 0.38)"
+      }
+    }
   }
 );
 // Store

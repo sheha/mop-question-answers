@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
+import Avatar from '@material-ui/core/Avatar';
 import ListItemText from '@material-ui/core/ListItemText';
 
 import Divider from '@material-ui/core/Divider';
@@ -32,18 +32,18 @@ class SimpleListItem extends React.Component {
   // todo : collapsable
 
   render() {
-    const { classes, displayItem } = this.props;
+    const { classes, question, user, created } = this.props;
 
 
     return (
       <React.Fragment>
-        <ListItem button>
-          <ListItemIcon>
+        <ListItem inset>
+          <Avatar>
             <HelpOutline />
-          </ListItemIcon>
-          <ListItemText inset primary="Sent mail" />
+          </Avatar>
+          <ListItemText primary={question} secondary={created} />
         </ListItem>
-        <Divider />
+        <Divider variant="inset"/>
       </React.Fragment>
 
 
@@ -53,7 +53,6 @@ class SimpleListItem extends React.Component {
 }
 
 SimpleListItem.propTypes = {
-  displayItem:PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
 };
 
