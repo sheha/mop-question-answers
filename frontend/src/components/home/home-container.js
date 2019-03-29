@@ -4,33 +4,34 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 // App Imports
+import HotQuestionsContainer from '../home/hot-questions/hot-questions-container';
 import Loading from '../loading'
-import TweetView from './view'
 
-class HomeContainer extends Component {
+class HomeViewContainer extends Component {
 
   render () {
     return (
-      <section>
-        <h2> HOME-CONTAINER</h2>
 
-        <br/>
 
-        {this.props.tweet.loading ? <Loading/> : <TweetView tweet={this.props.tweet.details}/>}
-      </section>
-    )
+          <HotQuestionsContainer />
+
+
+
+
+
+
+    );
   }
 }
 
-HomeContainer.propTypes = {
-  tweet: PropTypes.object.isRequired,
-  fetchTweet: PropTypes.func.isRequired
+HomeViewContainer.propTypes = {
+  user: PropTypes.object.isRequired
 }
 
-function tweetState (state) {
+function homeState (state) {
   return {
-    tweet: state.tweet
+    user: state.user
   }
 }
 
-export default connect(tweetState, {fetchTweet})(TweetViewContainer)
+export default connect(homeState)(HomeViewContainer)

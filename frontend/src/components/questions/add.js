@@ -5,11 +5,11 @@ import { Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 // UI Imports
-import Snackbar from 'material-ui/Snackbar'
-import RaisedButton from 'material-ui/RaisedButton'
-import { blue500, red500 } from 'material-ui/styles/colors'
-import TextField from 'material-ui/TextField'
-import { Card, CardText } from 'material-ui/Card'
+import Snackbar from '@material-ui/Snackbar'
+import RaisedButton from '@material-ui/RaisedButton'
+import { blue500, red500 } from '@material-ui/styles/colors'
+import TextField from '@material-ui/TextField'
+import { Card, CardText } from '@material-ui/Card'
 
 // App Imports
 import { postTweet } from '../../actions/questions'

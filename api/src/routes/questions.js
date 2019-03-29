@@ -40,12 +40,12 @@ questionRoutes.get('/questions/hot/:skip', authMiddleware, (request, response) =
     errors: []
   }
 
-    Question.find({}).sort({ likes: -1 }).skip(parseInt(request.params.skip)).exec(function (error, documents) {
+  Question.find({}).sort({ likes: -1 }).skip(parseInt(request.params.skip)).exec(function (error, documents) {
+
       if (documents.length > 0) {
         responseData.data = documents
         responseData.success = true
       }
-
       response.json(responseData)
     })
 

@@ -1,5 +1,6 @@
 const morgan = require("morgan");
 const logger = require("logger");
+const crypto = require("crypto");
 
 // log request to stdout
 const isDev = process.env.NODE_ENV === "development";
@@ -30,17 +31,11 @@ const logRequests = function(app) {
   morgan.token("uuid", function(req) {
     return req.uuid;
   });
-  const morganString =
-    ":method :url (:status) - :userId :clientIP - :response-time ms :res[content-length]";
+
   app.use(
-    morgan({
-      format: morganString,
-      stream: {
-        write: function(str) {
-          return logger.debug(str && str.slice(0, -1));
-        }
-      }
-    })
+    morgan(
+      ":method :url (:status) - :userId :clientIP - :response-time ms :res[content-length]"
+    )
   );
 };
 

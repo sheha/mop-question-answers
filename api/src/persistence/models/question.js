@@ -26,18 +26,18 @@ let QuestionSchema = new Schema({
         type: Date,
         default: Date.now
       },
-      userId: { type: Schema.Types.ObjectId, ref: "User" }
+      user: { type: Schema.Types.ObjectId, ref: "User" }
     })],
 
-    
-  user: { userSchema },
+
+  user: { type: Schema.Types.ObjectId, ref: "User" },
   created: {
     type: Date,
     default: Date.now
   },
 });
 
-QuestionsSchema.method('like', function likes(like, cb) {
+QuestionSchema.method('like', function likes(like, cb) {
   this.likes += 1;
   this.parent().save(cb);
 

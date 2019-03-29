@@ -5,12 +5,11 @@ import { Link, Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 // UI Imports
-import Snackbar from 'material-ui/Snackbar'
-import RaisedButton from 'material-ui/RaisedButton'
-import FlatButton from 'material-ui/FlatButton'
-import { blue500, red500 } from 'material-ui/styles/colors'
-import TextField from 'material-ui/TextField'
-import { Card, CardText } from 'material-ui/Card'
+import Snackbar from '@material-ui/core/Snackbar'
+import Button from '@material-ui/core/Button'
+import { blue500, red500 } from '@material-ui/core/colors'
+import TextField from '@material-ui/core/TextField'
+import { Card, CardText } from '@material-ui/core/Card'
 
 // App Imports
 import { postLogin } from '../../actions/user'
@@ -112,9 +111,9 @@ class UserLogin extends Component {
           <br/>
           <br/>
 
-          <RaisedButton label="Submit" type="submit" backgroundColor={blue500} />
+          <Button label="Submit" type="submit" backgroundColor={blue500} />
 
-          <Link to="/user/register"><FlatButton label="Register"/></Link>
+          <Link to="/user/register"><Button label="Register"/></Link>
         </form>
 
         <Snackbar

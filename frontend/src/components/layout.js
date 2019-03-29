@@ -5,9 +5,9 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 // UI Imports
-import AppBar from 'material-ui/AppBar'
-import Drawer from 'material-ui/Drawer'
-import MenuItem from 'material-ui/MenuItem'
+import AppBar from '@material-ui/core/AppBar'
+import Drawer from '@material-ui/core/Drawer'
+import MenuItem from '@material-ui/core/MenuItem'
 
 // App Imports
 import UserButtonLogin from './user/button/login'

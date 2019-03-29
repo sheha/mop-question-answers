@@ -12,7 +12,7 @@ const dbconn = require('./persistence/dbconn')
 const config = require('./config')
 let commonRoutes = require('./routes')
 let userRoutes = require('./routes/user')
-let tweetRoutes = require('./routes/questions')
+let questionRoutes = require('./routes/questions')
 
 // Setup
 let apiServer = express()
@@ -42,7 +42,7 @@ apiServer.use(cookieParser())
 // Routes
 apiServer.use(commonRoutes)
 apiServer.use(userRoutes)
-//apiServer.use(tweetRoutes)
+apiServer.use(questionRoutes)
 
 //provide stack trace with errors
 apiServer.use((err, req, res, next) => {

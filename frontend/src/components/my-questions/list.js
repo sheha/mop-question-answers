@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 
 // UI Imports
-import { Card, CardTitle } from 'material-ui/Card'
+import { Card, CardTitle } from '@material-ui/Card'
 
 function TweetList ({tweets}) {
   const emptyMessage = (

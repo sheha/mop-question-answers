@@ -5,10 +5,10 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 // UI Imports
-import MenuItem from 'material-ui/MenuItem'
-import IconButton from 'material-ui/IconButton'
-import IconMenu from 'material-ui/IconMenu'
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
+import MenuItem from '@material-ui/core/MenuItem'
+import IconButton from '@material-ui/core/IconButton'
+import Menu from '@material-ui/core/Menu'
+import MoreVert from '@material-ui/icons/MoreVert'
 
 // App Imports
 import { userLogout } from '../../../actions/user'
@@ -31,16 +31,16 @@ class UserButtonLogged extends Component {
 
   render () {
     return (
-      <IconMenu
+      <Menu
         iconButtonElement={
-          <IconButton><MoreVertIcon /></IconButton>
+          <IconButton><MoreVert /></IconButton>
         }
         targetOrigin={{horizontal: 'right', vertical: 'top'}}
         anchorOrigin={{horizontal: 'right', vertical: 'top'}}
       >
         <Link to="/tweet/add"><MenuItem primaryText="Tweet"/></Link>
         <MenuItem primaryText="Sign out" onClick={this.logout.bind(this)}/>
-      </IconMenu>
+      </Menu>
     )
   }
 }

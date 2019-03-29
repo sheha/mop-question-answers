@@ -6,15 +6,14 @@ import PropTypes from 'prop-types'
 // App Imports
 import { fetchHotQuestions } from '../../../actions/questions';
 import Loading from '../../loading'
-import QuestionsList from './list'
 
-import {SimpleListItem, SimpleExpansionPanel} from '../../common'
+import SimpleExpansionPanel from '../../common/simple-expansion-panel';
 
 class HotQuestionsContainer extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            //initial state for load more 
+            //initial state for load more func
             skip: 0
         };
     }
@@ -35,25 +34,29 @@ class HotQuestionsContainer extends Component {
     }
 
     render() {
-        let {questions} = this.props;
+
         return (
-            
-           
-            <section>
-                {this.props.questions.loading ? <Loading /> : <SimpleExpansionPanel itemColl={questions} />}
-            </section>
-        )
+          <div>
+            {this.props.hotQuestions.loading ? (
+              <Loading />
+            ) : (
+              <SimpleExpansionPanel
+                itemColl={this.props.hotQuestions}
+              />
+            )}
+          </div>
+        );
     }
 }
 
 HotQuestionsContainer.propTypes = {
-    questions: PropTypes.object.isRequired,
+    hotQuestions: PropTypes.object.isRequired,
     fetchHotQuestions: PropTypes.func.isRequired
 }
 
 function questionsState(state) {
     return {
-        questions: state.questions
+        hotQuestions: state.hotQuestions
     }
 }
 

@@ -56,12 +56,20 @@ export function fetchHotQuestions(skip) {
 
     return fetch(`/questions/hot/${skip}`).then(function (response) {
       if (response.ok) {
-        response.json().then(function (response) {
-          if (response.data.length > 0) {
+        return response.json().then(function (json) {
+
+          if (response.data && response.data.length > 0) {
             dispatch({
               type: HOME_SET_HOT_QUESTIONS,
               hotQuestions: response.data
             });
+          } else {
+            dispatch({
+              type: HOME_SET_HOT_QUESTIONS,
+              hotQuestions: {}
+            });
+
+
           }
         })
       } else {

@@ -6,9 +6,16 @@
     "configurations": [
         {
             "type": "node",
+            "request": "attach",
+            "name": "Attach",
+            "port": 3000
+        },
+        {
+            "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/api/src/routes/user.js"
-        }
+            "program": "${workspaceFolder}/api/src/index.js"
+        },
+
     ]
 }

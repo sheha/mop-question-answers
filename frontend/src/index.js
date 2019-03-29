@@ -8,10 +8,10 @@ import thunk from 'redux-thunk'
 import jwtDecode from 'jwt-decode'
 
 // UI Imports
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 
 // App Imports
-import registerServiceWorker from './registerServiceWorker'
+//import registerServiceWorker from './registerServiceWorker'
 import { setCurrentUser } from './actions/user'
 import rootReducer from './reducers/root'
 import App from './app'
@@ -46,4 +46,4 @@ ReactDOM.render(
 )
 
 // Service Worker
-registerServiceWorker()
+//registerServiceWorker()
