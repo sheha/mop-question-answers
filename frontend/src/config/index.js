@@ -6,7 +6,7 @@ let config = {
 }
 
 if (NODE_ENV === 'production') {
-  config.url.api = `https://${process.env.HOST}/`; // Change this URL according to your live server
+  config.url.api = `https://${process.env.HOST}/`; 
 } else {
   config.url.api = '/'
 }

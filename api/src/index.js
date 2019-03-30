@@ -1,5 +1,5 @@
 'use strict'
-
+// entry point of the backend app
 // Imports
 const express = require('express')
 

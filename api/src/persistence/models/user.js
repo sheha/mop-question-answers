@@ -8,7 +8,6 @@ let UserSchema = new Schema({
     name: { type: String,required:'First name cannot be empty'},
   email: {
     type: String,
-    required: 'Email address cannot be empty',
     unique: true
   },
   username: {
@@ -24,13 +23,27 @@ let UserSchema = new Schema({
         type: Date,
         default: Date.now
     },
-  myQuestions: [{ type: Schema.Types.ObjectId, ref: "Question" }]
+  questions: [{ type: Schema.Types.ObjectId, ref: "Question" }],
+  answers:[{type:Schema.Types.ObjectId, ref:"Answer"}]
+  
 });
-// register every answer
+// get user with most answers
 UserSchema.method('answer', function answering(answer, cb) {
     this.answered += 1;
     this.parent().save(cb);
 })
+
+// BandSchema.virtual('numMembers', {
+//   ref: 'Person', // The model to use
+//   localField: 'name', // Find people where `localField`
+//   foreignField: 'band', // is equal to `foreignField`
+//   count: true // And only get the number of docs
+// });
+
+// // Later
+// const doc = await Band.findOne({ name: 'Motley Crue' }).
+//   populate('numMembers');
+// doc.numMembers; // 2
 // hash password before saving
 // UserSchema.pre('save', (next) => {
 //     var user = this;

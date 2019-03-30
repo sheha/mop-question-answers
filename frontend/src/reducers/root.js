@@ -3,7 +3,7 @@ import { combineReducers } from 'redux'
 
 // App Imports
 import user from './user'
-import { latestQuestions, hotQuestions } from './questions'
+import { latestQuestions, hotQuestions, allQuestionsAnswers } from './questions'
 
 export default combineReducers({
   user,

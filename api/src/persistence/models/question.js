@@ -14,20 +14,7 @@ let QuestionSchema = new Schema({
     type: Number,
     default: 0
   },
-  answers: [
-
-    new Schema({
-
-      answer: {
-        type: String,
-        unique: true,
-      },
-      created: {
-        type: Date,
-        default: Date.now
-      },
-      user: { type: Schema.Types.ObjectId, ref: "User" }
-    })],
+  answers: [{type: Schema.Types.ObjectId, ref: "Answer"}],
 
 
   user: { type: Schema.Types.ObjectId, ref: "User" },

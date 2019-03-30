@@ -1,40 +1,52 @@
-// // Imports
-// import React, { Component } from 'react'
-// import { connect } from 'react-redux'
-// import PropTypes from 'prop-types'
+// Imports
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
-// // App Imports
-// import { fetchTweets } from '../../../actions/questions'
-// import Loading from '../../loading'
-// import TweetList from '../../my-questions/list'
+// App Imports
+import { fetchMostActiveUsers } from '../../../actions/user';
+import Loading from '../../loading'
 
-// class MostActiveUsersContainer extends Component {
-//     componentDidMount() {
-//         //this.props.fetchTweets()
-//     }
+import SimpleExpansionPanel from '../../common/simple-expansion-panel';
 
-//     render() {
-//         return (
-//             <section>
-//                 <h2><span role="img" aria-label="tweets">💭</span> Tweets</h2>
+class MostActiveUsersContainer extends Component {
+    constructor (props) {
+        super(props);
+        this.state = {
 
-//                 <br />
+        };
+    }
+    componentDidMount() {
+        this.props.fetchMostActiveUsers(this.state.skip);
+    }
 
-//                 {this.props.tweets.loading ? <Loading /> : <TweetList tweets={this.props.tweets.list} />}
-//             </section>
-//         )
-//     }
-// }
 
-// TweetListContainer.propTypes = {
-//     tweets: PropTypes.object.isRequired,
-//     fetchTweets: PropTypes.func.isRequired
-// }
 
-// function tweetsState(state) {
-//     return {
-//         tweets: state.tweets
-//     }
-// }
+    render() {
 
-// export default connect(tweetsState, { fetchTweets })(TweetListContainer)
+        return (
+          <div>
+            {this.props.mostActiveUsers.loading ? (
+              <Loading />
+            ) : (
+              <SimpleExpansionPanel
+                itemColl={this.props.mostActiveUsers}
+              />
+            )}
+          </div>
+        );
+    }
+}
+
+MostActiveUsersContainer.propTypes = {
+    mostActiveUsers: PropTypes.object.isRequired,
+    fetchMostActiveUsers: PropTypes.func.isRequired
+}
+
+function questionsState(state) {
+    return {
+        mostActiveUsers: state.mostActiveUsers
+    }
+}
+
+export default connect(questionsState, { fetchMostActiveUsers })(MostActiveUsersContainer)

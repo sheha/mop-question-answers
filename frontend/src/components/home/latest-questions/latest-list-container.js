@@ -1,40 +1,63 @@
-// // Imports
-// import React, { Component } from 'react'
-// import { connect } from 'react-redux'
-// import PropTypes from 'prop-types'
+// Imports
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
-// // App Imports
-// import { fetchTweets } from '../../../actions/questions'
-// import Loading from '../../loading'
-// import TweetList from '../../my-questions/list'
+// App Imports
+import { fetchLatestQuestions } from '../../../actions/questions';
+import Loading from '../../loading'
 
-// class LatestQuestionsContainer extends Component {
-//   componentDidMount () {
-//     //this.props.fetchTweets()
-//   }
+import SimpleExpansionPanel from '../../common/simple-expansion-panel';
 
-//   render () {
-//     return (
-//       <section>
-//         <h2><span role="img" aria-label="tweets">💭</span> Tweets</h2>
+class LatestQuestionsContainer extends Component {
+    constructor (props) {
+        super(props);
+        this.state = {
+            //initial state for load more func
+            skip: 0
+        };
+    }
+    componentDidMount() {
+        this.props.fetchLatestQuestions(this.state.skip);
+        this.setState({skip:this.state.skip + 20});
+    }
 
-//         <br/>
 
-//         {this.props.tweets.loading ? <Loading/> : <TweetList tweets={this.props.tweets.list}/>}
-//       </section>
-//     )
-//   }
-// }
+    loadMore(skip) {
+        this.props.fetchLatestQuestions(skip);
+        const nextSkip = this.state.skip + 20;
+        this.setState({ skip: nextSkip });
+    }
+    onLoadMoreClick(event){
+        event.preventDefault();
+        this.loadMore(this.state.skip);
+    }
 
-// LatestQuestionsContainer.propTypes = {
-//   tweets: PropTypes.object.isRequired,
-//   fetchTweets: PropTypes.func.isRequired
-// }
+    render() {
 
-// function tweetsState (state) {
-//   return {
-//     tweets: state.tweets
-//   }
-// }
+        return (
+          <div>
+            {this.props.latestQuestions.loading ? (
+              <Loading />
+            ) : (
+              <SimpleExpansionPanel
+                itemColl={this.props.latestQuestions}
+              />
+            )}
+          </div>
+        );
+    }
+}
 
-// export default connect(tweetsState, {fetchTweets})(LatestQuestionsContainer)
+LatestQuestionsContainer.propTypes = {
+    latestQuestions: PropTypes.object.isRequired,
+    fetchLatestQuestions: PropTypes.func.isRequired
+}
+
+function questionsState(state) {
+    return {
+        latestQuestions: state.latestQuestions
+    }
+}
+
+export default connect(questionsState, { fetchLatestQuestions })(LatestQuestionsContainer)

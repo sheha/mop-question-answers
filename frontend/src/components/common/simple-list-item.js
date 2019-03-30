@@ -37,7 +37,7 @@ class SimpleListItem extends React.Component {
 
     return (
       <React.Fragment>
-        <ListItem inset>
+        <ListItem variant="inset">
           <Avatar>
             <HelpOutline />
           </Avatar>

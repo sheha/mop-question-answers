@@ -5,9 +5,11 @@ import PropTypes from 'prop-types'
 import { withStyles } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
+import Loading from '../loading'
 // App Imports
 import HotQuestionsContainer from './hot-questions/hot-questions-container';
-import Loading from '../loading'
+import LatestQuestionsContainer from './latest-questions/latest-list-container'
+
 
 const styles = theme => ({
   paper: {
@@ -51,6 +53,7 @@ class HomeViewContainer extends Component {
         <Paper className={classes.paper}>
 
         <HotQuestionsContainer />
+        <LatestQuestionsContainer />
           </Paper>
         </div>
         </React.Fragment>

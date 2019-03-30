@@ -6,24 +6,26 @@ import {
   HOME_GET_LATEST_QUESTIONS,
   HOME_SET_LATEST_QUESTIONS,
   HOME_GET_HOT_QUESTIONS,
-  HOME_SET_HOT_QUESTIONS
+  HOME_SET_HOT_QUESTIONS,
+  QUESTIONS_GET_ALL_QA,
+  QUESTIONS_SET_ALL_QA
 } from "../actions/questions";
 
-export function latestQuestions (state = {list: [], error: false, loading: false}, action = {}) {
+export function allQuestionsAnswers (state = {allQuestionsAnswers: [], error: false, loading: false}, action = {}) {
   switch (action.type) {
-    case HOME_GET_LATEST_QUESTIONS:
+    case QUESTIONS_GET_ALL_QA:
       return update(state, {
         $merge: {
-          list: [],
+          allQuestionsAnswers: [],
           error: false,
           loading: true
         }
       });
 
-    case HOME_SET_LATEST_QUESTIONS:
+    case QUESTIONS_SET_ALL_QA:
       return update(state, {
         $merge: {
-          list: action.questions,
+          allQuestionsAnswers: action.allQuestionsAnswers,
           error: false,
           loading: false
         }
@@ -34,12 +36,37 @@ export function latestQuestions (state = {list: [], error: false, loading: false
   }
 }
 
-export function hotQuestions (state = {list: [], error: false, loading: false}, action = {}) {
+export function latestQuestions (state = {latestQuestions: [], error: false, loading: false}, action = {}) {
+  switch (action.type) {
+    case HOME_GET_LATEST_QUESTIONS:
+      return update(state, {
+        $merge: {
+          latestQuestions: [],
+          error: false,
+          loading: true
+        }
+      });
+
+    case HOME_SET_LATEST_QUESTIONS:
+      return update(state, {
+        $merge: {
+          latestQuestions: action.latestQuestions,
+          error: false,
+          loading: false
+        }
+      });
+
+    default:
+      return state;
+  }
+}
+
+export function hotQuestions (state = {hotQuestions: [], error: false, loading: false}, action = {}) {
   switch (action.type) {
     case HOME_GET_HOT_QUESTIONS:
       return update(state, {
         $merge: {
-          list: [],
+          hotQuestions: [],
           error: false,
           loading: true
         }
@@ -48,7 +75,7 @@ export function hotQuestions (state = {list: [], error: false, loading: false}, 
     case HOME_SET_HOT_QUESTIONS:
       return update(state, {
         $merge: {
-          list: action.questions,
+          hotQuestions: action.hotQuestions,
           error: false,
           loading: false
         }

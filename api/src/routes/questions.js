@@ -11,10 +11,30 @@ const config = require('../config')
 let authMiddleware = require('./middlewares/auth')
 let Question = require('../persistence/models/question');
 
-// Common Routes
+
 let questionRoutes = express.Router()
 
 
+questionRoutes.get('/questions/all', authMiddleware, (request, response) => {
+  let responseData = {
+    success: false,
+    data: {},
+    errors: []
+  }
+
+    Question.find({}).sort({ created: -1 }).populate('user').populate('answers').exec(function (error, documents) {
+      if (documents.length > 0) {
+        responseData.data = documents
+        responseData.success = true
+      }
+
+      response.json(responseData)
+    })
+
+})
+
+
+// GET latest questions for homepage
 questionRoutes.get('/questions/latest/:skip', authMiddleware, (request, response) => {
   let responseData = {
     success: false,
@@ -33,6 +53,7 @@ questionRoutes.get('/questions/latest/:skip', authMiddleware, (request, response
 
 })
 
+// GET hottest questions for homepage
 questionRoutes.get('/questions/hot/:skip', authMiddleware, (request, response) => {
   let responseData = {
     success: false,
@@ -50,7 +71,7 @@ questionRoutes.get('/questions/hot/:skip', authMiddleware, (request, response) =
     })
 
 })
-
+// POST question add endpoint - protected route
 questionRoutes.post('/questions/add', authMiddleware, (request, response) => {
   let responseData = {
     success: false,
@@ -93,7 +114,7 @@ questionRoutes.post('/questions/add', authMiddleware, (request, response) => {
     response.json(responseData)
   }
 })
-
+// POST answer - protected route
 questionRoutes.post('/questions/answer', authMiddleware, (request, response) => {
   let responseData = {
     success: false,
@@ -136,7 +157,7 @@ questionRoutes.post('/questions/answer', authMiddleware, (request, response) => 
     response.json(responseData)
   }
 })
-
+//GET individual question
 questionRoutes.get('/questions/:questionId', authMiddleware, (request, response) => {
   let responseData = {
     success: false,

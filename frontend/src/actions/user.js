@@ -7,6 +7,8 @@ import config from '../config'
 export const USER_CURRENT_SET = 'USER_CURRENT_SET'
 export const USER_CURRENT_ALL_QUESTIONS = "USER_CURRENT_ALL_QUESTIONS";
 
+export const HOME_GET_MOST_ACTIVE_USERS = 'HOME_GET_MOST_ACTIVE_USERS'
+
 export function postLogin (credentials) {
   return dispatch => {
     return fetch(`${ config.url.api }user/login`, {
@@ -68,3 +70,37 @@ export function userLogout () {
     return {success: true}
   }
 }
+
+export function fetchMostActiveUsers () {
+  return dispatch => {
+    dispatch({
+      type: HOME_GET_MOST_ACTIVE_USERS
+    });
+
+    return fetch('/user/all').then(function (response) {
+      if (response.ok) {
+        response.json().then(function (response) {
+          if (response.data && response.data.length > 0) {
+            dispatch({
+              type: HOME_SET_MOST_ACTIVE_USERS,
+              mostActiveUsers: response.data
+            });
+          }else{
+            dispatch({
+              type: HOME_SET_MOST_ACTIVE_USERS,
+              mostActiveUsers: [] // dispatch with empty collection 
+            });
+          }
+
+        } 
+        )
+      } else {
+        console.log('Looks like the response wasn\'t perfect, got status', response.status)
+      }
+    }, function (e) {
+      console.log('Fetch failed!', e)
+    })
+  }
+}
+
+

@@ -10,8 +10,46 @@ const config = require('./../config')
 let authMiddleware = require('./middlewares/auth')
 let User = require('../persistence/models/user')
 
-// Common Routes
-let userRoutes = express.Router()
+
+let userRoutes = express.Router();
+
+//get most active users - aggregation on answers
+userRoutes.get('/user/all', authMiddleware, (request, response) => {
+  let responseData = {
+    success: false,
+    data: {},
+    errors: []
+  }
+
+  User.aggregate([{
+    "$project": {
+      "count": {
+        "$sum": {
+          "$map": {
+            "input": "answers",
+            "as": "result",
+            "in": {
+              "$size": "$$result.items"
+            }
+          }
+        }
+      }
+    }
+  }]).exec(function (error, documents) {
+
+    if (documents.length > 0) {
+      responseData.data = documents
+      responseData.success = true
+    }
+    response.json(responseData)
+  });
+
+
+
+
+
+})
+  ;
 
 // Login
 userRoutes.post('/user/login', authMiddleware, (request, response) => {
@@ -22,15 +60,15 @@ userRoutes.post('/user/login', authMiddleware, (request, response) => {
   }
 
   if (request.body.username) {
-    User.findOne({username: request.body.username}, (error, document) => {
+    User.findOne({ username: request.body.username }, (error, document) => {
 
       if (error) {
-        responseData.errors.push({type: 'critical', message: error})
+        responseData.errors.push({ type: 'critical', message: error })
 
         response.json(responseData)
       } else {
         if (!document) {
-          responseData.errors.push({type: 'warning', message: 'No user exists with this username.'})
+          responseData.errors.push({ type: 'warning', message: 'No user exists with this username.' })
 
           response.json(responseData)
         } else {
@@ -40,12 +78,12 @@ userRoutes.post('/user/login', authMiddleware, (request, response) => {
                 responseData.data.token = jwt.sign(document._doc, config.secret)
                 responseData.success = true
               } else {
-                responseData.errors.push({type: 'critical', message: 'The password is incorrect.'})
+                responseData.errors.push({ type: 'critical', message: 'The password is incorrect.' })
               }
 
               response.json(responseData)
             } else {
-              responseData.errors.push({type: 'critical', message: 'Please try again.'})
+              responseData.errors.push({ type: 'critical', message: 'Please try again.' })
 
               response.json(responseData)
             }
@@ -54,7 +92,7 @@ userRoutes.post('/user/login', authMiddleware, (request, response) => {
       }
     })
   } else {
-    responseData.errors.push({type: 'critical', message: 'Username not provided.'})
+    responseData.errors.push({ type: 'critical', message: 'Username not provided.' })
 
     response.json(responseData)
   }
@@ -70,7 +108,7 @@ userRoutes.post('/user/register', (request, response) => {
 
   if (request.body.username != '') {
     // Check user exists
-    User.findOne({username: request.body.username}, (error, document) => {
+    User.findOne({ username: request.body.username }, (error, document) => {
       if (!document) {
         // User does not exists
 
@@ -92,26 +130,26 @@ userRoutes.post('/user/register', (request, response) => {
                 responseData.success = true
                 responseData.data.userId = userId
               } else {
-                responseData.errors.push({type: 'default', message: 'Please try again.'})
+                responseData.errors.push({ type: 'default', message: 'Please try again.' })
               }
 
               response.json(responseData)
             })
           } else {
-            responseData.errors.push({type: 'default', message: 'Please try again.'})
+            responseData.errors.push({ type: 'default', message: 'Please try again.' })
           }
         })
 
       } else {
         // User already exists
 
-        responseData.errors.push({type: 'warning', message: 'The username is taken. Please choose something else.'})
+        responseData.errors.push({ type: 'warning', message: 'The username is taken. Please choose something else.' })
 
         response.json(responseData)
       }
     })
   } else {
-    responseData.errors.push({type: 'critical', message: 'Username not provided.'})
+    responseData.errors.push({ type: 'critical', message: 'Username not provided.' })
 
     response.json(responseData)
   }
