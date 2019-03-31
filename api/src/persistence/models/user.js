@@ -5,19 +5,22 @@ const mongoose=require('mongoose');
 let Schema = mongoose.Schema;
 
 let UserSchema = new Schema({
-    name: { type: String,required:'First name cannot be empty'},
+    firstname: { type: String},
+    lastname: { type: String},
   email: {
     type: String,
     unique: true
   },
+  address: { type: String},
+  city:{type:String},
+  zip:{type:String},
+  country:{type:String},
   username: {
     type: String,
-      required:'Username is required',
     unique: true
   },
   password: {
-    type: String,
-    required: true
+    type: String
   },
     createdAt: {
         type: Date,

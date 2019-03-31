@@ -5,7 +5,8 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
-function PersonalInfo() {
+function PersonalInfo(props) {
+  const {userFull} = this.props;
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -32,38 +33,37 @@ function PersonalInfo() {
             autoComplete="lname"
           />
         </Grid>
+
         <Grid item xs={12}>
           <TextField
             required
-            id="address1"
-            name="address1"
-            label="Address line 1"
+            id="username"
+            name="username"
+            label="Username"
             fullWidth
-            autoComplete="billing address-line1"
           />
         </Grid>
+
         <Grid item xs={12}>
           <TextField
-            id="address2"
-            name="address2"
-            label="Address line 2"
+            required
+            id="address"
+            name="address"
+            label="Address"
             fullWidth
-            autoComplete="billing address-line2"
           />
         </Grid>
+
         <Grid item xs={12} sm={6}>
           <TextField
-            required
             id="city"
             name="city"
             label="City"
             fullWidth
-            autoComplete="billing address-level2"
+
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField id="state" name="state" label="State/Province/Region" fullWidth />
-        </Grid>
+
         <Grid item xs={12} sm={6}>
           <TextField
             required
@@ -84,12 +84,7 @@ function PersonalInfo() {
             autoComplete="billing country"
           />
         </Grid>
-        <Grid item xs={12}>
-          <FormControlLabel
-            control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
-            label="Use this address for payment details"
-          />
-        </Grid>
+
       </Grid>
     </React.Fragment>
   );

@@ -56,13 +56,13 @@ const styles = theme => ({
 
 
 class UserRegister extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
-      firstname:'',
-      lastname:'',
-      email:'',
+      firstname: '',
+      lastname: '',
+      email: '',
       username: '',
       password: '',
       error: '',
@@ -73,7 +73,7 @@ class UserRegister extends Component {
     }
   }
 
-  onSubmit (event) {
+  onSubmit(event) {
     event.preventDefault()
 
     console.log('E - submit #form-user')
@@ -83,7 +83,7 @@ class UserRegister extends Component {
     input.password = this.state.password
 
     if (input.username !== '' && input.password !== '') {
-      this.setState({isLoggingIn: true, isLoading: true})
+      this.setState({ isLoggingIn: true, isLoading: true })
 
       this.props.postRegister(input).then((response) => {
         if (response.success) {
@@ -94,6 +94,10 @@ class UserRegister extends Component {
             firstname: '',
             lastname: '',
             email: '',
+            address: '',
+            city: '',
+            zip: '',
+            country: '',
             username: '',
             password: '',
             error: ''
@@ -101,7 +105,7 @@ class UserRegister extends Component {
 
           // Redirect
           setTimeout(() => {
-            this.setState({registered: true})
+            this.setState({ registered: true })
           }, 1000)
         } else {
           this.setState({
@@ -120,7 +124,7 @@ class UserRegister extends Component {
     }
   }
 
-  onChange (event) {
+  onChange(event) {
     this.setState({
       [event.target.name]: event.target.value
     })
@@ -149,8 +153,8 @@ class UserRegister extends Component {
                   </CardContent>
                 </Card>
               ) : (
-                ""
-              )}
+                  ""
+                )}
 
               {this.state.message ? (
                 <Card>
@@ -159,8 +163,8 @@ class UserRegister extends Component {
                   </CardContent>
                 </Card>
               ) : (
-                ""
-              )}
+                  ""
+                )}
 
               <form id="form-user" onSubmit={this.onSubmit.bind(this)}>
                 <TextField
@@ -181,15 +185,8 @@ class UserRegister extends Component {
                   variant="outlined"
                   margin="dense"
                 />
-                <TextField
-                  name="email"
-                  value={this.state.email}
-                  onChange={this.onChange.bind(this)}
-                  label="Email"
-                  fullWidth={true}
-                  variant="outlined"
-                  margin="dense"
-                />
+
+
                 <TextField
                   name="username"
                   value={this.state.username}
@@ -210,6 +207,69 @@ class UserRegister extends Component {
                   variant="outlined"
                   margin="dense"
                 />
+                <TextField
+                  name="email"
+                  value={this.state.email}
+                  onChange={this.onChange.bind(this)}
+                  label="Email"
+                  fullWidth={true}
+                  variant="outlined"
+                  margin="dense"
+                />
+
+                <TextField
+                  name="address"
+                  value={this.state.address}
+                  onChange={this.onChange.bind(this)}
+                  label="Adress"
+                  fullWidth={true}
+                  variant="outlined"
+                  margin="dense"
+                />
+
+
+                <TextField
+                  name="city"
+                  value={this.state.city}
+                  onChange={this.onChange.bind(this)}
+                  label="City"
+                  fullWidth={true}
+                  variant="outlined"
+                  margin="dense"
+                />
+
+                <TextField
+                  name="zip"
+                  value={this.state.zip}
+                  onChange={this.onChange.bind(this)}
+                  label="Zip"
+                  fullWidth={true}
+                  variant="outlined"
+                  margin="dense"
+                />
+
+
+                <TextField
+                  name="city"
+                  value={this.state.city}
+                  onChange={this.onChange.bind(this)}
+                  label="Adress"
+                  fullWidth={true}
+                  variant="outlined"
+                  margin="dense"
+                />
+
+                <TextField
+                  name="zip"
+                  value={this.state.zip}
+                  onChange={this.onChange.bind(this)}
+                  label="Zip"
+                  fullWidth={true}
+                  variant="outlined"
+                  margin="dense"
+                />
+
+
 
                 <br />
                 <br />
@@ -248,4 +308,4 @@ UserRegister.propTypes = {
   postRegister: PropTypes.func.isRequired
 }
 
-export default connect(null, {postRegister})(withStyles(styles)(UserRegister))
+export default connect(null, { postRegister })(withStyles(styles)(UserRegister))

@@ -43,12 +43,10 @@ class SimpleListItem extends React.Component {
           </Avatar>
           <ListItemText primary={question} secondary={created} />
         </ListItem>
-        <Divider variant="inset"/>
+        <Divider variant="inset" />
       </React.Fragment>
 
-
-
-      );
+    );
   }
 }
 
