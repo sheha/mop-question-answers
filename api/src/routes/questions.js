@@ -15,7 +15,7 @@ let Question = require('../persistence/models/question');
 let questionRoutes = express.Router()
 
 
-questionRoutes.get('/questions/all', authMiddleware, (request, response) => {
+questionRoutes.get('/questions/all/:skip', authMiddleware, (request, response) => {
   let responseData = {
     success: false,
     data: {},

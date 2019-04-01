@@ -106,12 +106,13 @@ class Layout extends Component {
               noWrap
               className={classes.toolbarTitle}
             >
-              Questionairre
+              Questions and Answers
             </Typography>
-
-            <Button color="secondary">Home</Button>
-            <Button color="secondary">Questions</Button>
-            <Button color="secondary">Profile</Button>
+            <Link to="/"><Button color="secondary">Home</Button></Link>
+            <Link ><Button color="secondary">Questions</Button></Link>
+            <Link ><Button color="secondary">Profile</Button></Link>
+            
+            
             {isAuthenticated ? <UserButtonLogged /> : <UserButtonLogin />}
           </Toolbar>
         </AppBar>

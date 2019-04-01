@@ -21,33 +21,45 @@ userRoutes.get('/user/all', authMiddleware, (request, response) => {
     errors: []
   }
 
-  User.aggregate([{
-    "$project": {
-      "count": {
-        "$sum": {
-          "$map": {
-            "input": "answers",
-            "as": "result",
-            "in": {
-              "$size": "$$result.items"
-            }
-          }
+  User.aggregate([{ $unwind: "$answers" },
+  { $unwind: "$answers.answer" },
+  { $project: {_id: '$_id', user: '$answers.answer'} },
+  { $group: {_id: '$user', count: {'$sum': 1} }},
+  { $group: {
+        _id: null,
+        users: {$addToSet: '$_id'},
+        occurances: {$push: {'user': '$_id', count: '$count'}}
         }
-      }
-    }
-  }]).exec(function (error, documents) {
+   }]).exec(function (error, documents) {
 
-    if (documents.length > 0) {
-      responseData.data = documents
+    if (documents.length >= 0) {
+      responseData.data = documents || {}
       responseData.success = true
     }
     response.json(responseData)
   });
+})
 
+userRoutes.get('/user/profile', authMiddleware, (request, response) => {
+  let responseData = {
+    success: false,
+    data: {},
+    errors: []
+  }
+  if (request.body.username) {
+    User.findOne({ username: request.body.username }).sort({ created: -1 }).populate('questions').populate('answers').exec(function (error, documents) {
+      if (documents.length >= 0) {
+        responseData.data = documents || {}
+        responseData.success = true
+      }
 
+      response.json(responseData)
+    })
+  } else {
+    responseData.errors.push({ type: 'critical', message: 'Username not provided.' })
 
-
-
+    response.json(responseData)
+  }
 })
   ;
 

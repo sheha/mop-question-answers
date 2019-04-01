@@ -12,44 +12,45 @@ import TextField from '@material-ui/TextField'
 import { Card, CardText } from '@material-ui/Card'
 
 // App Imports
-import { postTweet } from '../../actions/questions'
-import AuthRedirect from '../user/auth-redirect'
-import Loading from '../loading'
+import { postQuestion } from '../../../actions/questions'
+import AuthRedirect from '../../user/auth-redirect'
+import Loading from '../../loading'
 
-class TweetAdd extends Component {
+class QuestionAdd extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      text: '',
+      question: '',
       isLoading: false,
       error: '',
       notification: false,
       viewTweet: false,
-      tweetId: ''
+      questionId: '',
+      userId:''
     }
   }
 
   onSubmit (event) {
     event.preventDefault()
 
-    console.log('add submit prevdefault')
 
     this.setState({isLoading: true})
 
     let input = {}
-    input.text = this.state.text
+    input.question = this.state.question
+    input.user = this.user;
 
-    if (input.text !== '') {
-      this.props.postTweet(input).then((response) => {
+    if (input.question !== '') {
+      this.props.postQuestion(input).then((response) => {
         if (response.success) {
-          this.setState({isLoading: false, notification: true, text: '', error: '', tweetId: response.data.tweetId})
+          this.setState({isLoading: false, notification: true, text: '', error: '', questionId: response.data.questionId})
         } else {
           this.setState({isLoading: false, error: response.errors[0].message})
         }
       })
     } else {
-      this.setState({isLoading: false, error: 'Tweet cannot be empty.', notification: false})
+      this.setState({isLoading: false, error: 'Question cannot be empty.', notification: false})
     }
   }
 
@@ -72,12 +73,12 @@ class TweetAdd extends Component {
 
         <form id="form-add" onSubmit={this.onSubmit.bind(this)}>
           <TextField
-            name="text"
-            value={this.state.text}
+            name="question"
+            value={this.state.question}
             onChange={this.onChange.bind(this)}
-            label="What's happening?"
+            label="Please enter your question."
             multiLine={true}
-            rows={1}
+            rows={2}
             fullWidth={true}
           />
 
@@ -89,13 +90,13 @@ class TweetAdd extends Component {
 
         <Snackbar
           open={this.state.notification}
-          message="Tweet has been posted"
+          message="Question has been added!"
           autoHideDuration={4000}
-          action="View Tweet"
+          action="View Question"
           onActionClick={() => (this.setState({viewTweet: true}))}
         />
 
-        {this.state.viewTweet ? <Redirect to={`/tweet/${ this.state.tweetId }`}/> : ''}
+        {this.state.viewTweet ? <Redirect to={`/questions/${ this.state.questionId }`}/> : ''}
 
         <AuthRedirect/>
       </section>

@@ -62,9 +62,13 @@ class UserRegister extends Component {
     this.state = {
       firstname: '',
       lastname: '',
-      email: '',
+      email: '',           
       username: '',
       password: '',
+      address: '',
+      city: '',
+      zip: '',
+      country: '',
       error: '',
       isLoading: false,
       isLoggingIn: false,
@@ -79,8 +83,16 @@ class UserRegister extends Component {
     console.log('E - submit #form-user')
 
     let input = {}
-    input.username = this.state.username
-    input.password = this.state.password
+    input.firstname = this.state.firstname
+      input.lastname= this.state.lastname
+      input.email= this.state.email          
+      input.username= this.state.username
+      input.password= this.state.password
+      input.address= this.state.address
+      input.city= this.state.city
+      input.zip = this.state.zip
+      input.country = this.state.country
+
 
     if (input.username !== '' && input.password !== '') {
       this.setState({ isLoggingIn: true, isLoading: true })
@@ -93,13 +105,13 @@ class UserRegister extends Component {
             notification: true,
             firstname: '',
             lastname: '',
-            email: '',
+            email: '',           
+            username: '',
+            password: '',
             address: '',
             city: '',
             zip: '',
             country: '',
-            username: '',
-            password: '',
             error: ''
           })
 
@@ -228,6 +240,8 @@ class UserRegister extends Component {
                 />
 
 
+
+
                 <TextField
                   name="city"
                   value={this.state.city}
@@ -238,6 +252,16 @@ class UserRegister extends Component {
                   margin="dense"
                 />
 
+<TextField
+                  name="country"
+                  value={this.state.country}
+                  onChange={this.onChange.bind(this)}
+                  label="Country"
+                  fullWidth={true}
+                  variant="outlined"
+                  margin="dense"
+                />
+                
                 <TextField
                   name="zip"
                   value={this.state.zip}
@@ -247,35 +271,13 @@ class UserRegister extends Component {
                   variant="outlined"
                   margin="dense"
                 />
-
-
-                <TextField
-                  name="city"
-                  value={this.state.city}
-                  onChange={this.onChange.bind(this)}
-                  label="Adress"
-                  fullWidth={true}
-                  variant="outlined"
-                  margin="dense"
-                />
-
-                <TextField
-                  name="zip"
-                  value={this.state.zip}
-                  onChange={this.onChange.bind(this)}
-                  label="Zip"
-                  fullWidth={true}
-                  variant="outlined"
-                  margin="dense"
-                />
-
 
 
                 <br />
                 <br />
 
                 <Button type="submit" color="secondary">
-                  Submit
+                  Register
                 </Button>
 
                 <Link to="/user/login">
@@ -285,7 +287,7 @@ class UserRegister extends Component {
 
               <Snackbar
                 open={this.state.isLoggingIn}
-                message="Logging in..."
+                message="Registering..."
                 autoHideDuration={1000}
               />
 

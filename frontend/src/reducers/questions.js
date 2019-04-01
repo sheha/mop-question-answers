@@ -11,12 +11,12 @@ import {
   QUESTIONS_SET_ALL_QA
 } from "../actions/questions";
 
-export function allQuestionsAnswers (state = {allQuestionsAnswers: [], error: false, loading: false}, action = {}) {
+export function allQuestionsAnswers (state = {allQuestionsAnswers: {}, error: false, loading: false}, action = {}) {
   switch (action.type) {
     case QUESTIONS_GET_ALL_QA:
       return update(state, {
         $merge: {
-          allQuestionsAnswers: [],
+          allQuestionsAnswers: {},
           error: false,
           loading: true
         }
@@ -36,12 +36,12 @@ export function allQuestionsAnswers (state = {allQuestionsAnswers: [], error: fa
   }
 }
 
-export function latestQuestions (state = {latestQuestions: [], error: false, loading: false}, action = {}) {
+export function latestQuestions (state = {latestQuestions: {}, error: false, loading: false}, action = {}) {
   switch (action.type) {
     case HOME_GET_LATEST_QUESTIONS:
       return update(state, {
         $merge: {
-          latestQuestions: [],
+          latestQuestions: {},
           error: false,
           loading: true
         }
@@ -61,12 +61,12 @@ export function latestQuestions (state = {latestQuestions: [], error: false, loa
   }
 }
 
-export function hotQuestions (state = {hotQuestions: [], error: false, loading: false}, action = {}) {
+export function hotQuestions (state = {hotQuestions: {}, error: false, loading: false}, action = {}) {
   switch (action.type) {
     case HOME_GET_HOT_QUESTIONS:
       return update(state, {
         $merge: {
-          hotQuestions: [],
+          hotQuestions: {},
           error: false,
           loading: true
         }

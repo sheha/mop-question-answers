@@ -34,14 +34,15 @@ class LatestQuestionsContainer extends Component {
     }
 
     render() {
+      const label = this.props.label;
 
         return (
           <div>
             {this.props.latestQuestions.loading ? (
               <Loading />
             ) : (
-              <SimpleExpansionPanel
-                itemColl={this.props.latestQuestions}
+              <SimpleExpansionPanel label={label}
+                questions={this.props.latestQuestions}
               />
             )}
           </div>

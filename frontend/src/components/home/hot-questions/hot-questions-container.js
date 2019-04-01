@@ -34,6 +34,8 @@ class HotQuestionsContainer extends Component {
     }
 
     render() {
+      const {label, hotQuestions} = this.props;
+
 
         return (
           <div>
@@ -41,7 +43,7 @@ class HotQuestionsContainer extends Component {
               <Loading />
             ) : (
               <SimpleExpansionPanel
-                itemColl={this.props.hotQuestions}
+                questions={hotQuestions}
               />
             )}
           </div>

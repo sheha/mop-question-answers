@@ -39,7 +39,7 @@ class SimpleNestedListViewer extends React.Component {
 
   render() {
 
-    const { classes, containerTitle, allQuestions, allAnswers  } = props;
+    const { classes, containerTitle, allQuestionsAnswers, myQuestions  } = props;
     const data = questions;
   
     return (

@@ -23,8 +23,7 @@ const styles = theme => ({
 
 
 function SimpleExpansionPanel(props) {
-  let { classes, itemsColl, label } = props;
-  label = "Hot Questions"
+  let { classes, questions, label, mostActiveUsers } = props;
   const displayItems = itemsColl && itemsColl.map(({ _id, question, answers, created, user }) => (
     <SimpleListItem key={_id} question={question} created={created} user={user} >
 

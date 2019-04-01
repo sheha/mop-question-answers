@@ -12,25 +12,27 @@ import SimpleExpansionPanel from '../../common/simple-expansion-panel';
 class MostActiveUsersContainer extends Component {
     constructor (props) {
         super(props);
-        this.state = {
+        this.state = {        
 
         };
     }
     componentDidMount() {
-        this.props.fetchMostActiveUsers(this.state.skip);
+        this.props.fetchMostActiveUsers();
     }
 
 
 
     render() {
 
+      const label = this.props.label;
+      const mostActiveUsers = this.props.mostActiveUsers || {};
+
         return (
           <div>
             {this.props.mostActiveUsers.loading ? (
               <Loading />
             ) : (
-              <SimpleExpansionPanel
-                itemColl={this.props.mostActiveUsers}
+              <SimpleExpansionPanel label={label} mostActiveUsers={mostActiveUsers}
               />
             )}
           </div>

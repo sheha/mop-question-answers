@@ -5,8 +5,8 @@ import { Route, Switch } from 'react-router-dom'
 // App Imports
 import Layout from './components/layout'
 import HomeViewContainer from './components/home/home-container'
-// import TweetAdd from './components/tweet/add'
-// import TweetViewContainer from './components/tweet/view-container'
+import QuestionsAnswersViewContainer from './components/questions/questions-answers-container'
+import ProfileDetailsViewContainer from './components/profile/view-container';
 import UserLogin from './components/user/login'
 import UserRegister from './components/user/register'
 import About from './components/about'
@@ -16,9 +16,8 @@ const App = () => (
   <Layout>
     <Switch>
       <Route exact path="/" component={HomeViewContainer} />
-      {/* <Route exact path="/questions" component={QuestionsContainer} />
-      <Route exact path="/user/" component={ProfileContainer}/> */}
-      {/* <Route path="/tweet/:tweetId" component={TweetViewContainer}/> */} */}
+      <Route exact path="/questions" component={QuestionsAnswersViewContainer} />
+      <Route exact path="/user/" component={ProfileDetailsViewContainer}/> 
       <Route path="/user/login" component={UserLogin}/>
       <Route path="/user/register" component={UserRegister}/>
       <Route path="/about" component={About} />

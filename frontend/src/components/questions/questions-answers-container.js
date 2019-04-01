@@ -7,9 +7,11 @@ import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Loading from '../loading'
 // App Imports
-import HotQuestionsContainer from './hot-questions/hot-questions-container';
-import LatestQuestionsContainer from './latest-questions/latest-list-container'
-import MostActiveUsersContainer from './most-active-user/most-active-users-container'
+// import HotQuestionsContainer from './hot-questions/hot-questions-container';
+// import LatestQuestionsContainer from './latest-questions/latest-list-container'
+
+import QuestionsAnswersDetails from './questions-answers/questions-answers-details'
+
 
 
 const styles = theme => ({
@@ -34,30 +36,26 @@ const styles = theme => ({
 });
 
 
-
-class HomeViewContainer extends Component {
+class QuestionsAnswersViewContainer extends Component {
 
   render() {
-    const classes = this.props.classes;
+    const {classes, user} = this.props.classes;
     return (
       <React.Fragment>
       <div className={classes.heroUnit}>
         <div className={classes.heroContent}>
-          <Typography component="h1" variant="h5" align="center" color="textPrimary" gutterBottom>
-            Home Page
-            </Typography>
+
           <Typography variant="h6" align="center" color="textSecondary" paragraph>
-            Display wrapper around Latest Answers, Hottest Questions, Most Active Users components.
-            The endpoints for the components are public, no auth needed here.
+            Display wrapper around QuestionsAnswersDetails and QuestionAdd components.
+            Authenticated users can add questions and answers, and like or dislike questions.
+            Anonymous users can view the listing, but adding is disabled.
             </Typography>
 
         </div>
 
         <Paper className={classes.paper}>
-        <LatestQuestionsContainer label={"Latest Questions"} />
-        <HotQuestionsContainer label={"Hottest Questions"}/>
-        <MostActiveUsersContainer label={"Most Active Users"}/>
-        
+
+        <QuestionsAnswersDetails user={user} />
           </Paper>
         </div>
         </React.Fragment>
@@ -65,7 +63,7 @@ class HomeViewContainer extends Component {
   }
 }
 
-HomeViewContainer.propTypes = {
+QuestionsAnswersViewContainer.propTypes = {
   classes:PropTypes.object.isRequired,
   user: PropTypes.object.isRequired
 }
@@ -79,4 +77,4 @@ function homeState (state) {
 export default connect(
   homeState,
   {}
-)(withStyles(styles)(HomeViewContainer));
+)(withStyles(styles)(QuestionsAnswersViewContainer));

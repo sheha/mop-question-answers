@@ -22,24 +22,29 @@ export const QUESTIONS_SET_ALL_QA = "QUESTIONS_SET_ALL_Q";
 export const SET_QUESTION = 'SET_QUESTION'
 export const GET_QUESTION = 'GET_QUESTION'
 
-export function fetchAllQuestionsAnswers () {
+export function fetchAllQuestionsAnswers (skip) {
   return dispatch => {
     dispatch({
       type: QUESTIONS_GET_ALL_QA
     });
 
-    return fetch(`${config.url.api}/questions/all`).then(function (response) {
+    return fetch(`${config.url.api}/questions/all/${skip}`).then(function (response) {
       if (response.ok) {
         response.json().then(function (response) {
-          if (response.data && response.data.length > 0) {
-            dispatch({
-              type: HOME_SET_LATEST_QUESTIONS,
-              allQuestionsAnswers: response.data
-            });
+          if (response.data && response.data.length >=0 ) {
+
+              dispatch({
+                type: HOME_SET_LATEST_QUESTIONS,
+                allQuestionsAnswers: response.data || {} 
+              });
+
+          
+            
+           
           }else{
             dispatch({
               type: HOME_SET_LATEST_QUESTIONS,
-              allQuestionsAnswers: [] // dispatch with empty collection 
+              allQuestionsAnswers: {} // dispatch with empty collection, it's okay to receive {}
             });
           }
 

@@ -5,16 +5,16 @@ const mongoose=require('mongoose');
 let Schema = mongoose.Schema;
 
 let UserSchema = new Schema({
-    firstname: { type: String},
-    lastname: { type: String},
+  firstname: { type: String },
+  lastname: { type: String },
   email: {
     type: String,
     unique: true
   },
-  address: { type: String},
-  city:{type:String},
-  zip:{type:String},
-  country:{type:String},
+  address: { type: String },
+  city: { type: String },
+  zip: { type: String },
+  country: { type: String },
   username: {
     type: String,
     unique: true
@@ -22,18 +22,18 @@ let UserSchema = new Schema({
   password: {
     type: String
   },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
   questions: [{ type: Schema.Types.ObjectId, ref: "Question" }],
-  answers:[{type:Schema.Types.ObjectId, ref:"Answer"}]
-  
+  answers: [{ type: Schema.Types.ObjectId, ref: "Answer" }]
+
 });
 // get user with most answers
 UserSchema.method('answer', function answering(answer, cb) {
-    this.answered += 1;
-    this.parent().save(cb);
+  this.answered += 1;
+  this.parent().save(cb);
 })
 
 // BandSchema.virtual('numMembers', {

@@ -10,9 +10,23 @@ import Typography from '@material-ui/core/Typography';
 import SwipeableViews from 'react-swipeable-views';
 import AppBar from '@material-ui/core/AppBar';
 
-import AddressForm from './AddressForm';
-import PaymentForm from './PaymentForm';
-import Review from './Review';
+import PersonalInfo from './personal-info';
+import MyQuestions from './my-questions';
+import {fetchFullUserProfile} from '../../actions/user'
+import { connect } from 'tls';
+
+function TabContainer({ children, dir }) {
+  return (
+    <Typography component="div" dir={dir} style={{ padding: 8 * 3 }}>
+      {children}
+    </Typography>
+  );
+}
+
+TabContainer.propTypes = {
+  children: PropTypes.node.isRequired,
+  dir: PropTypes.string.isRequired,
+};
 
 const styles = theme => ({
 
@@ -50,14 +64,23 @@ const styles = theme => ({
 });
 
 
-class Checkout extends React.Component {
-  state = {
-    activeTab: 0,
-  };
+class ProfileDetailsContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeTab: 0
+    };
+  }
+
+  componentDidMount() {
+    this.props.fetchFullUserProfile();
+  }
+
+
 
   handleTab = (event, value) => {
     this.setState(state => ({
-      activeTab: valye,
+      activeTab: value,
     }));
   };
 
@@ -72,28 +95,31 @@ class Checkout extends React.Component {
         <CssBaseline />
         <main className={classes.layout}>
           <Paper className={classes.paper}>
-          <AppBar position="static" color="default">
-          <Tabs
-            value={this.state.value}
-            onChange={this.handleChange}
-            indicatorColor="primary"
-            textColor="primary"
-            variant="fullWidth"
-          >
-            <Tab label="Item One" />
-            <Tab label="Item Two" />
-            <Tab label="Item Three" />
-          </Tabs>
-        </AppBar>
-        <SwipeableViews
-          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-          index={this.state.value}
-          onChangeIndex={this.handleChangeIndex}
-        >
-          <TabContainer dir={theme.direction}>Item One</TabContainer>
-          <TabContainer dir={theme.direction}>Item Two</TabContainer>
-          <TabContainer dir={theme.direction}>Item Three</TabContainer>
-        </SwipeableViews>
+            <AppBar position="static" color="default">
+              <Tabs
+                value={this.state.value}
+                onChange={this.handleChange}
+                indicatorColor="secondary"
+                textColor="primary"
+                variant="fullWidth"
+              >
+                <Tab label="Personal Info" />
+                <Tab label="My Questions" />
+
+              </Tabs>
+            </AppBar>
+            <SwipeableViews
+              axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+              index={this.state.value}
+              onChangeIndex={this.handleChangeIndex}
+            >
+              <TabContainer dir={theme.direction}>
+                <PersonalInfo userFull={userFull}/>
+              </TabContainer>
+              <TabContainer><MyQuestions myQuestions={userFull} />
+              </TabContainer>
+
+            </SwipeableViews>
           </Paper>
         </main>
       </React.Fragment>
@@ -101,8 +127,15 @@ class Checkout extends React.Component {
   }
 }
 
-Checkout.propTypes = {
+ProfileDetailsContainer.propTypes = {
   classes: PropTypes.object.isRequired,
-};
+  userFull:PropTypes.object.isRequired
 
-export default withStyles(styles)(Checkout);
+};
+function profileState (state) {
+  return {
+    userFull: state.userFull
+  }
+}
+
+export default connect(profileState, {}) (withStyles(styles)(ProfileDetailsContainer));
