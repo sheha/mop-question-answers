@@ -17,7 +17,7 @@ let userRoutes = express.Router();
 userRoutes.get('/user/all', authMiddleware, (request, response) => {
   let responseData = {
     success: false,
-    data: {},
+    data: [],
     errors: []
   }
 
@@ -31,9 +31,12 @@ userRoutes.get('/user/all', authMiddleware, (request, response) => {
         occurances: {$push: {'user': '$_id', count: '$count'}}
         }
    }]).exec(function (error, documents) {
-
-    if (documents.length >= 0) {
-      responseData.data = documents || {}
+     if (documents.length == 0) {
+       responseData.data = documents
+       responseData.success = true
+     }
+    if (documents.length >  0) {
+      responseData.data = documents
       responseData.success = true
     }
     response.json(responseData)
@@ -47,9 +50,9 @@ userRoutes.get('/user/profile', authMiddleware, (request, response) => {
     errors: []
   }
   if (request.body.username) {
-    User.findOne({ username: request.body.username }).sort({ created: -1 }).populate('questions').populate('answers').exec(function (error, documents) {
+    User.findOne({ username: request.body.username }).populate('questions').populate('answers').exec(function (error, documents) {
       if (documents.length >= 0) {
-        responseData.data = documents || {}
+        responseData.data = documents
         responseData.success = true
       }
 
