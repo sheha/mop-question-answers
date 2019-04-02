@@ -5,15 +5,16 @@ import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
+import Collapse from "@material-ui/core/Collapse";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import StarBorder from "@material-ui/icons/StarBorder";
+
+
 import Grid from '@material-ui/core/Grid';
 
-const questions = [
-  { name: 'Product 1', desc: 'A nice thing', price: '$9.99' },
-  { name: 'Product 2', desc: 'Another thing', price: '$3.45' },
-  { name: 'Product 3', desc: 'Something else', price: '$6.51' },
-  { name: 'Product 4', desc: 'Best thing of all', price: '$14.11' },
-  { name: 'Shipping', desc: '', price: 'Free' },
-];
+
 
 
 const styles = theme => ({
@@ -29,9 +30,12 @@ const styles = theme => ({
 });
 
 class SimpleNestedListViewer extends React.Component {
-  state = {
-    open: true,
-  };
+  constructor (props) {
+    super(props);
+    this.state = {
+      open: true
+    };
+  }
 
   handleClick = () => {
     this.setState(state => ({ open: !state.open }));
@@ -39,9 +43,9 @@ class SimpleNestedListViewer extends React.Component {
 
   render() {
 
-    const { classes, containerTitle, allQuestionsAnswers, myQuestions  } = props;
-    const data = questions;
-  
+    const { classes, containerTitle, allQuestionsAnswers, myQuestions  } = this.props;
+    const data = [];
+
     return (
       <React.Fragment>
         <Typography variant="h6" gutterBottom>
@@ -67,7 +71,7 @@ class SimpleNestedListViewer extends React.Component {
               </Collapse>
             </React.Fragment>
           ))}
-  
+
         </List>
       </React.Fragment>
     );

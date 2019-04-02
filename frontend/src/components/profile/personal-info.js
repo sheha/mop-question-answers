@@ -5,7 +5,7 @@ import TextField from '@material-ui/core/TextField';
 
 
 function PersonalInfo(props) {
-  const {userFull} = this.props;
+  const {userProfile} = props;
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -13,10 +13,10 @@ function PersonalInfo(props) {
       </Typography>
       <Grid container spacing={24}>
         <Grid item xs={12} sm={6}>
-          <TextField            
+          <TextField
             id="firstname"
             name="firstname"
-            value={userFull.firstname}
+            value={userProfile.firstname}
             label="First name"
             fullWidth
 
@@ -28,7 +28,7 @@ function PersonalInfo(props) {
             id="lastname"
             name="lastname"
             label="Last name"
-            value={userFull.lastname}
+            value={userProfile.lastname}
             fullWidth
 
           />
@@ -40,7 +40,7 @@ function PersonalInfo(props) {
             id="username"
             name="username"
             label="Username"
-            value={userFull.username}
+            value={userProfile.username}
             fullWidth
             disabled
           />
@@ -52,7 +52,7 @@ function PersonalInfo(props) {
             id="address"
             name="address"
             label="Address"
-            value={userFull.address}
+            value={userProfile.address}
             fullWidth
             disabled
           />
@@ -63,7 +63,7 @@ function PersonalInfo(props) {
             id="city"
             name="city"
             label="City"
-            value={userFull.city}
+            value={userProfile.city}
             fullWidth
             disabled
 
@@ -76,7 +76,7 @@ function PersonalInfo(props) {
             id="zip"
             name="zip"
             label="Zip / Postal code"
-            value={userFull.zip}
+            value={userProfile.zip}
             fullWidth
             disabled
           />
@@ -87,7 +87,7 @@ function PersonalInfo(props) {
             id="country"
             name="country"
             label="Country"
-            value={userFull.country}
+            value={userProfile.country}
             fullWidth
             disabled
           />

@@ -1,24 +1,37 @@
 // Imports
 import isEmpty from 'lodash/isEmpty'
+import update from "immutability-helper";
 
 // App Imports
-import { USER_CURRENT_SET,
-   HOME_GET_MOST_ACTIVE_USERS,
-    HOME_SET_MOST_ACTIVE_USERS,
-     PROFILE_GET_FULL_USER,
-      PROFILE_SET_FULL_USER } from '../actions/user'
+import {
+  USER_CURRENT_SET,
+  HOME_GET_MOST_ACTIVE_USERS,
+  HOME_SET_MOST_ACTIVE_USERS,
+  PROFILE_GET_FULL_USER,
+  PROFILE_SET_FULL_USER
+} from '../actions/user'
 
 const initialState = {
   isAuthenticated: false,
-  user: {}
+  user: {},
+  mostActiveUsers: [],
+  userProfile: {},
+  error: false,
+  loading: false,
+
+
 }
 
-export function  mostActiveUsers(state = {mostActiveUsers: {}, error: false, loading: false}, action = {})  {
+export function mostActiveUsers(state = {
+  mostActiveUsers: [],
+  error: false,
+  loading:false
+}, action = {})  {
   switch (action.type) {
     case HOME_GET_MOST_ACTIVE_USERS:
       return update(state, {
         $merge: {
-          mostActiveUsers: {},
+          mostActiveUsers: [],
           error: false,
           loading: true
         }
@@ -38,7 +51,7 @@ export function  mostActiveUsers(state = {mostActiveUsers: {}, error: false, loa
   }
 }
 
-export function  userProfile(state = {userProfile: {}, error: false, loading: false}, action = {})  {
+export function userProfile(state = initialState, action = {})  {
   switch (action.type) {
     case PROFILE_GET_FULL_USER:
       return update(state, {
@@ -68,10 +81,14 @@ export function  userProfile(state = {userProfile: {}, error: false, loading: fa
 export default (state = initialState, action = {}) => {
   switch (action.type) {
     case USER_CURRENT_SET:
-      return {
-        isAuthenticated: !isEmpty(action.user),
-        user: action.user
-      }
+   return update(state, {
+        $merge: {
+          isAuthenticated: !isEmpty(action.user),
+          user: action.user,
+          error: false,
+          loading: true
+        }
+      });
 
     default:
       return state

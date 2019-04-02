@@ -62,7 +62,7 @@ class UserRegister extends Component {
     this.state = {
       firstname: '',
       lastname: '',
-      email: '',           
+      email: '',
       username: '',
       password: '',
       address: '',
@@ -85,7 +85,7 @@ class UserRegister extends Component {
     let input = {}
     input.firstname = this.state.firstname
       input.lastname= this.state.lastname
-      input.email= this.state.email          
+      input.email= this.state.email
       input.username= this.state.username
       input.password= this.state.password
       input.address= this.state.address
@@ -105,7 +105,7 @@ class UserRegister extends Component {
             notification: true,
             firstname: '',
             lastname: '',
-            email: '',           
+            email: '',
             username: '',
             password: '',
             address: '',
@@ -261,7 +261,7 @@ class UserRegister extends Component {
                   variant="outlined"
                   margin="dense"
                 />
-                
+
                 <TextField
                   name="zip"
                   value={this.state.zip}
@@ -293,7 +293,7 @@ class UserRegister extends Component {
 
               <Snackbar
                 open={this.state.notification}
-                message="Login successful, redirecting..."
+                message="User Registered successfully, redirecting..."
                 autoHideDuration={2000}
               />
 

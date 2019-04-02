@@ -28,27 +28,27 @@ export function fetchAllQuestionsAnswers (skip) {
       type: QUESTIONS_GET_ALL_QA
     });
 
-    return fetch(`${config.url.api}/questions/all/${skip}`).then(function (response) {
+    return fetch(`${config.url.api }questions/all/${skip}`).then(function (response) {
       if (response.ok) {
         response.json().then(function (response) {
-          if (response.data && response.data.length >=0 ) {
+          if (response.data) {
 
               dispatch({
-                type: HOME_SET_LATEST_QUESTIONS,
-                allQuestionsAnswers: response.data || {} 
+                type: QUESTIONS_SET_ALL_QA,
+                allQuestionsAnswers: response.data
               });
 
-          
-            
-           
+
+
+
           }else{
             dispatch({
-              type: HOME_SET_LATEST_QUESTIONS,
-              allQuestionsAnswers: {} // dispatch with empty collection, it's okay to receive {}
+              type: QUESTIONS_SET_ALL_QA,
+              allQuestionsAnswers: [] // dispatch with empty collection, it's okay to receive []
             });
           }
 
-        } 
+        }
         )
       } else {
         console.log('Looks like the response wasn\'t perfect, got status', response.status)
@@ -65,8 +65,10 @@ export function fetchLatestQuestions (skip) {
       type: HOME_GET_LATEST_QUESTIONS
     });
 
-    return fetch(`/questions/latest/${skip}`).then(function (response) {
+    return fetch(`${config.url.api }questions/latest/${skip}`).then(function (response) {
+
       if (response.ok) {
+        console.log("ssssss", response)
         response.json().then(function (response) {
           if (response.data && response.data.length > 0) {
             dispatch({
@@ -76,11 +78,11 @@ export function fetchLatestQuestions (skip) {
           }else{
             dispatch({
               type: HOME_SET_LATEST_QUESTIONS,
-              latestQuestions: [] // dispatch with empty collection 
+              latestQuestions: [] // dispatch with empty collection
             });
           }
 
-        } 
+        }
         )
       } else {
         console.log('Looks like the response wasn\'t perfect, got status', response.status)
@@ -97,7 +99,7 @@ export function fetchHotQuestions(skip) {
       type: HOME_GET_HOT_QUESTIONS
     });
 
-    return fetch(`/questions/hot/${skip}`).then(function (response) {
+    return fetch(`${config.url.api }questions/hot/${skip}`).then(function (response) {
       if (response.ok) {
         return response.json().then(function (json) {
 
@@ -109,7 +111,7 @@ export function fetchHotQuestions(skip) {
           } else {
             dispatch({
               type: HOME_SET_HOT_QUESTIONS,
-              hotQuestions: [] 
+              hotQuestions: []
             });
 
 

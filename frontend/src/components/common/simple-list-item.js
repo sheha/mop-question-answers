@@ -32,7 +32,7 @@ class SimpleListItem extends React.Component {
   // todo : collapsable
 
   render() {
-    const { classes, question, user, created } = this.props;
+    const { classes, question, user, created, mostActiveUser } = this.props;
 
 
     return (
@@ -41,11 +41,10 @@ class SimpleListItem extends React.Component {
           <Avatar>
             <HelpOutline />
           </Avatar>
-          <ListItemText primary={question} secondary={created} />
+          <ListItemText primary={mostActiveUser} secondary={created} />
         </ListItem>
         <Divider variant="inset" />
       </React.Fragment>
-
     );
   }
 }

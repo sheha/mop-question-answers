@@ -23,10 +23,6 @@ questionRoutes.get('/questions/all/:skip', authMiddleware, (request, response) =
   }
 
     Question.find({}).sort({ created: -1 }).populate('user').populate('answers').exec(function (error, documents) {
-      if (documents.length == 0) {
-        responseData.data = documents
-        responseData.success = true
-      }
       if (documents.length > 0) {
         responseData.data = documents
         responseData.success = true

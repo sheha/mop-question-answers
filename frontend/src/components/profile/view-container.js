@@ -1,5 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import withStyles from '@material-ui/core/styles/withStyles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Tabs from '@material-ui/core/Tabs';
@@ -9,11 +10,11 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import SwipeableViews from 'react-swipeable-views';
 import AppBar from '@material-ui/core/AppBar';
+import { useTheme } from "@material-ui/core/styles";
 
 import PersonalInfo from './personal-info';
 import MyQuestions from './my-questions';
 import {fetchFullUserProfile} from '../../actions/user'
-import { connect } from 'tls';
 
 function TabContainer({ children, dir }) {
   return (
@@ -73,22 +74,24 @@ class ProfileDetailsContainer extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchFullUserProfile();
+    this.props.fetchFullUserProfile(this.props.user.user.username);
   }
 
 
 
-  handleTab = (event, value) => {
-    this.setState(state => ({
-      activeTab: value,
-    }));
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
+
+  handleChangeIndex = index => {
+    this.setState({ value: index });
   };
 
 
 
   render() {
-    const { classes, userFull } = this.props;
-    const { activeTab } = this.state;
+    const { classes, userProfile } = this.props;
+
 
     return (
       <React.Fragment>
@@ -109,14 +112,14 @@ class ProfileDetailsContainer extends React.Component {
               </Tabs>
             </AppBar>
             <SwipeableViews
-              axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+              axis={'x'}
               index={this.state.value}
               onChangeIndex={this.handleChangeIndex}
             >
-              <TabContainer dir={theme.direction}>
-                <PersonalInfo userFull={userFull}/>
+              <TabContainer dir='rtl'>
+                <PersonalInfo userProfile={userProfile}/>
               </TabContainer>
-              <TabContainer><MyQuestions myQuestions={userFull} />
+              <TabContainer><MyQuestions myQuestions={userProfile} />
               </TabContainer>
 
             </SwipeableViews>
@@ -128,14 +131,17 @@ class ProfileDetailsContainer extends React.Component {
 }
 
 ProfileDetailsContainer.propTypes = {
+  user:PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
-  userFull:PropTypes.object.isRequired
+  userProfile: PropTypes.object.isRequired,
+  fetchFullUserProfile:PropTypes.func.isRequired
 
 };
 function profileState (state) {
   return {
-    userFull: state.userFull
+    userProfile: state.userProfile,
+    user:state.user
   }
 }
 
-export default connect(profileState, {}) (withStyles(styles)(ProfileDetailsContainer));
+export default connect(profileState, {fetchFullUserProfile}) (withStyles(styles)(ProfileDetailsContainer));

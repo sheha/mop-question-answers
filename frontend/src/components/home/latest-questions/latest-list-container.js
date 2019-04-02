@@ -35,6 +35,7 @@ class LatestQuestionsContainer extends Component {
 
     render() {
       const label = this.props.label;
+      const latestQuestions = this.props.latestQuestions.latestQuestions
 
         return (
           <div>
@@ -42,7 +43,7 @@ class LatestQuestionsContainer extends Component {
               <Loading />
             ) : (
               <SimpleExpansionPanel label={label}
-                questions={this.props.latestQuestions}
+                latestQuestions={latestQuestions}
               />
             )}
           </div>

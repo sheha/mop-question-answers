@@ -18,8 +18,7 @@ import rootReducer from './reducers/root'
 import App from './app'
 import './index.css'
 
-// theme is a required proptype for new material-ui,
-// make our own while at it
+
 const theme = createMuiTheme(
   {
     typography: {  // fix for outdated typography elements

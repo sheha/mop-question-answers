@@ -108,11 +108,19 @@ class Layout extends Component {
             >
               Questions and Answers
             </Typography>
-            <Link to="/"><Button color="secondary">Home</Button></Link>
-            <Link ><Button color="secondary">Questions</Button></Link>
-            <Link ><Button color="secondary">Profile</Button></Link>
-            
-            
+            <Link to="/">
+              <Button color="secondary">Home</Button>
+            </Link>
+            <Link to="/questions">
+              <Button color="secondary">Questions</Button>
+            </Link>
+
+            {isAuthenticated ? (
+              <Link to="/user/profile">
+                <Button color="secondary">Profile</Button>
+              </Link>
+            ) : null}
+
             {isAuthenticated ? <UserButtonLogged /> : <UserButtonLogin />}
           </Toolbar>
         </AppBar>

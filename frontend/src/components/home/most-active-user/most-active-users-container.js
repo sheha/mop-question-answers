@@ -10,26 +10,26 @@ import Loading from '../../loading'
 import SimpleExpansionPanel from '../../common/simple-expansion-panel';
 
 class MostActiveUsersContainer extends Component {
-    constructor (props) {
-        super(props);
-        this.state = {        
+  constructor (props) {
+    super(props);
+    this.state = {
 
-        };
-    }
-    componentDidMount() {
-        this.props.fetchMostActiveUsers();
-    }
+    };
+  }
+  componentDidMount() {
+    this.props.fetchMostActiveUsers();
+  }
 
 
 
-    render() {
+  render() {
 
-      const label = this.props.label;
-      const mostActiveUsers = this.props.mostActiveUsers || {};
+    const label = this.props.label;
+    const mostActiveUsers = this.props.mostActiveUsers.mostActiveUsers;
 
         return (
           <div>
-            {this.props.mostActiveUsers.loading ? (
+            {mostActiveUsers.loading ? (
               <Loading />
             ) : (
               <SimpleExpansionPanel label={label} mostActiveUsers={mostActiveUsers}

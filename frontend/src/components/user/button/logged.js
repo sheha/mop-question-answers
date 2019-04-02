@@ -59,7 +59,7 @@ import PropTypes from 'prop-types'
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import AccountCircle from '@material-ui/core/AccountCircle'
+import AccountCircle from '@material-ui/icons/AccountCircle'
 
 // App Imports
 import { userLogout } from '../../../actions/user'
@@ -73,7 +73,7 @@ class UserButtonLogged extends React.Component {
 
   };
 
-  
+
   logout (event) {
     event.preventDefault()
     this.setState({ anchorEl: null });
@@ -121,4 +121,3 @@ UserButtonLogged.propTypes = {
 }
 
 export default connect(null, {userLogout})(UserButtonLogged)
-

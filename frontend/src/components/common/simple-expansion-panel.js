@@ -23,12 +23,19 @@ const styles = theme => ({
 
 
 function SimpleExpansionPanel(props) {
-  let { classes, questions, label, mostActiveUsers } = props;
-  const displayItems = itemsColl && itemsColl.map(({ _id, question, answers, created, user }) => (
-    <SimpleListItem key={_id} question={question} created={created} user={user} >
+  const { classes, latestQuestions, hotQuestions, label, mostActiveUsers } = props;
 
-    </SimpleListItem>
-  ))
+
+  // const latestQuestionsDisplay =
+  //   latestQuestions.map(({ _id, question, answers, created, user }) => (
+  //     <SimpleListItem
+  //       key={_id}
+  //       question={question}
+  //       created={created}
+  //       user={user}
+  //     />)) || [];
+
+
   return (
     <div className={classes.root}>
       <ExpansionPanel>
@@ -36,13 +43,26 @@ function SimpleExpansionPanel(props) {
           <Typography className={classes.heading}>{label}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <List
-            className={classes.root}
-          >
-            {displayItems}
+          <List className={classes.root}>
+            {/* {latestQuestionsDisplay} */}
+
+
+            {/* {hotQuestions &&
+              hotQuestions.map(({ _id, question, answers, created, user }) => (
+                <SimpleListItem
+                  key={_id}
+                  question={question}
+                  created={created}
+                  user={user}
+                />
+              ))} */}
+            {/* {mostActiveUsers && mostActiveUsers.map(({ _id, user }) => (
+              <SimpleListItem
+                key={_id}
+                mostActiveUser={user}
+              />
+            ))} */}
           </List>
-
-
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </div>

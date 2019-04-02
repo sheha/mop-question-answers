@@ -16,8 +16,9 @@ const App = () => (
   <Layout>
     <Switch>
       <Route exact path="/" component={HomeViewContainer} />
-      <Route exact path="/questions" component={QuestionsAnswersViewContainer} />
-      <Route exact path="/user/" component={ProfileDetailsViewContainer}/> 
+      <Route path="/questions" component={QuestionsAnswersViewContainer} />
+
+      <Route path="/user/profile" component={ProfileDetailsViewContainer}/>
       <Route path="/user/login" component={UserLogin}/>
       <Route path="/user/register" component={UserRegister}/>
       <Route path="/about" component={About} />

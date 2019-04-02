@@ -15,7 +15,6 @@ class QuestionsAnswersDetails extends Component {
         this.state = {
             //initial state for load more func
             skip: 0,
-            user:{}
         };
     }
     componentDidMount() {
@@ -43,7 +42,7 @@ class QuestionsAnswersDetails extends Component {
               <Loading />
             ) : (
               <SimpleNestedListViewer user={user}
-                allQuestionsAnswers={this.props.allQuestionsAnswers}
+                allQuestionsAnswers={this.props.allQuestionsAnswers.allQuestionsAnswers}
               />
             )}
           </div>
@@ -60,7 +59,7 @@ QuestionsAnswersDetails.propTypes = {
 function questionsState(state) {
     return {
         allQuestionsAnswers: state.allQuestionsAnswers,
-                
+
     }
 }
 

@@ -43,7 +43,7 @@ userRoutes.get('/user/all', authMiddleware, (request, response) => {
   });
 })
 
-userRoutes.get('/user/profile', authMiddleware, (request, response) => {
+userRoutes.post('/user/info', authMiddleware, (request, response) => {
   let responseData = {
     success: false,
     data: {},

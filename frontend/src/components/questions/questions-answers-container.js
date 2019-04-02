@@ -39,7 +39,7 @@ const styles = theme => ({
 class QuestionsAnswersViewContainer extends Component {
 
   render() {
-    const {classes, user} = this.props.classes;
+    const {classes, user} = this.props;
     return (
       <React.Fragment>
       <div className={classes.heroUnit}>
