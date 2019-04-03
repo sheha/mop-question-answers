@@ -22,7 +22,7 @@ questionRoutes.get('/questions/all/:skip', authMiddleware, (request, response) =
     errors: []
   }
 
-    Question.find({}).sort({ created: -1 }).populate('user').populate('answers').exec(function (error, documents) {
+    Question.find({}).sort({ created: -1 }).populate('user', 'username').populate('answers').exec(function (error, documents) {
       if (documents.length > 0) {
         responseData.data = documents
         responseData.success = true
@@ -86,10 +86,10 @@ questionRoutes.post('/questions/add', authMiddleware, (request, response) => {
   }
 
   if (!isEmpty(request.user)) {
-    if (request.body.text != '') {
+    if (request.body.question != '') {
       let question = {
-        question: request.body.text,
-        userId: request.user._id,
+        question: request.body.question,
+        user: request.user._id,
         created: Date.now()
       }
 

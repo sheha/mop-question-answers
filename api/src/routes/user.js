@@ -134,6 +134,13 @@ userRoutes.post('/user/register', (request, response) => {
             let user = {
               username: request.body.username,
               password: hashPassword,
+              firstname: request.body.firstname,
+              lastname: request.body.lastname,
+              email: request.body.email,
+              address: request.body.address,
+              city: request.body.city,
+              country: request.body.country,
+              zip:request.body.zip,
               createdAt: new Date()
             }
 

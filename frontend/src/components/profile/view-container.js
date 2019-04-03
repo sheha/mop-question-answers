@@ -90,7 +90,8 @@ class ProfileDetailsContainer extends React.Component {
 
 
   render() {
-    const { classes, userProfile } = this.props;
+    const { classes } = this.props;
+    const userProfile = this.props.user.user
 
 
     return (

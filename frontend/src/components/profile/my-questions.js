@@ -8,7 +8,7 @@ function MyQuestions(props) {
       <Typography variant="h6" gutterBottom>
         My Questions
       </Typography>
-      <SimpleNestedListView myQuestions={props} />
+      {/* <SimpleNestedListView myQuestions={props} /> */}
     </React.Fragment>
   );
 }

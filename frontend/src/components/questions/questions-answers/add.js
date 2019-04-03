@@ -5,11 +5,11 @@ import { Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 // UI Imports
-import Snackbar from '@material-ui/Snackbar'
+import Snackbar from '@material-ui/core/Snackbar'
 import Button from '@material-ui/core/Button'
-import { blue500, red500 } from '@material-ui/styles/colors'
-import TextField from '@material-ui/TextField'
-import { Card, CardText } from '@material-ui/Card'
+import { blue500, red500 } from '@material-ui/core/colors'
+import TextField from '@material-ui/core/TextField'
+import { Card, CardText } from '@material-ui/core/Card'
 
 // App Imports
 import { postQuestion } from '../../../actions/questions'
@@ -25,7 +25,6 @@ class QuestionAdd extends Component {
       isLoading: false,
       error: '',
       notification: false,
-      viewTweet: false,
       questionId: '',
       userId:''
     }
@@ -63,7 +62,7 @@ class QuestionAdd extends Component {
   render () {
     return (
       <section>
-        <h2><span role="img" aria-label="tweet">💭</span> Tweet to the world</h2>
+        <h2><span role="img" aria-label="tweet">💭</span> Ask A Question</h2>
 
         <br/>
 
@@ -77,8 +76,8 @@ class QuestionAdd extends Component {
             value={this.state.question}
             onChange={this.onChange.bind(this)}
             label="Please enter your question."
-            multiLine={true}
-            rows={2}
+            multiline
+            maxRows={2}
             fullWidth={true}
           />
 
@@ -93,19 +92,18 @@ class QuestionAdd extends Component {
           message="Question has been added!"
           autoHideDuration={4000}
           action="View Question"
-          onActionClick={() => (this.setState({viewTweet: true}))}
         />
 
-        {this.state.viewTweet ? <Redirect to={`/questions/${ this.state.questionId }`}/> : ''}
+        <AuthRedirect />
 
-        <AuthRedirect/>
+
       </section>
     )
   }
 }
 
-TweetAdd.propTypes = {
-  postTweet: PropTypes.func.isRequired
+QuestionAdd.propTypes = {
+  postQuestion: PropTypes.func.isRequired
 }
 
-export default connect(null, {postTweet})(TweetAdd)
+export default connect(null, {postQuestion})(QuestionAdd)

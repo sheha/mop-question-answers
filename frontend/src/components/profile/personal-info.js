@@ -1,7 +1,8 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from "@material-ui/core/ListItemText";
 
 
 function PersonalInfo(props) {
@@ -13,86 +14,46 @@ function PersonalInfo(props) {
       </Typography>
       <Grid container spacing={24}>
         <Grid item xs={12} sm={6}>
-          <TextField
-            id="firstname"
-            name="firstname"
-            value={userProfile.firstname}
-            label="First name"
-            fullWidth
 
-
-          />
+          <ListItem  divider dense>
+            <ListItemText >First Name: {userProfile.firstname}</ListItemText>
+          </ListItem>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
-            id="lastname"
-            name="lastname"
-            label="Last name"
-            value={userProfile.lastname}
-            fullWidth
 
-          />
+          <ListItem divider dense>
+            <ListItemText >Last Name: {userProfile.lastname}</ListItemText>
+          </ListItem>
         </Grid>
 
         <Grid item xs={12}>
-          <TextField
-            required
-            id="username"
-            name="username"
-            label="Username"
-            value={userProfile.username}
-            fullWidth
-            disabled
-          />
+          <ListItem divider dense>
+            <ListItemText >Username: {userProfile.username}</ListItemText>
+          </ListItem>
         </Grid>
 
         <Grid item xs={12}>
-          <TextField
-            required
-            id="address"
-            name="address"
-            label="Address"
-            value={userProfile.address}
-            fullWidth
-            disabled
-          />
+         <ListItem divider dense>
+            <ListItemText >Address: {userProfile.address}</ListItemText>
+          </ListItem>
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <TextField
-            id="city"
-            name="city"
-            label="City"
-            value={userProfile.city}
-            fullWidth
-            disabled
-
-          />
+          <ListItem divider dense>
+            <ListItemText >City: {userProfile.city}</ListItemText>
+          </ListItem>
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="zip"
-            name="zip"
-            label="Zip / Postal code"
-            value={userProfile.zip}
-            fullWidth
-            disabled
-          />
+          <ListItem divider dense>
+            <ListItemText >Zip: {userProfile.zip}</ListItemText>
+          </ListItem>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="country"
-            name="country"
-            label="Country"
-            value={userProfile.country}
-            fullWidth
-            disabled
-          />
+          <ListItem divider dense>
+            <ListItemText >Country: {userProfile.country}</ListItemText>
+          </ListItem>
         </Grid>
-
       </Grid>
     </React.Fragment>
   );

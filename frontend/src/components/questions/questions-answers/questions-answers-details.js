@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 import { fetchAllQuestionsAnswers } from '../../../actions/questions';
 import Loading from '../../loading'
 
-import SimpleNestedListViewer from '../../common/simple-expansion-panel';
+import SimpleNestedListViewer from '../../common/simple-nested-listview-container';
 
 class QuestionsAnswersDetails extends Component {
     constructor (props) {

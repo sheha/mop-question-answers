@@ -6,11 +6,10 @@ import { withStyles } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Loading from '../loading'
-// App Imports
-// import HotQuestionsContainer from './hot-questions/hot-questions-container';
-// import LatestQuestionsContainer from './latest-questions/latest-list-container'
+
 
 import QuestionsAnswersDetails from './questions-answers/questions-answers-details'
+import QuestionAdd from './questions-answers/add';
 
 
 
@@ -39,7 +38,8 @@ const styles = theme => ({
 class QuestionsAnswersViewContainer extends Component {
 
   render() {
-    const {classes, user} = this.props;
+    const { classes, user } = this.props;
+    const isAuthenticated = this.props.user.isAuthenticated;
     return (
       <React.Fragment>
       <div className={classes.heroUnit}>
@@ -54,8 +54,10 @@ class QuestionsAnswersViewContainer extends Component {
         </div>
 
         <Paper className={classes.paper}>
-
-        <QuestionsAnswersDetails user={user} />
+            {isAuthenticated ?
+              <QuestionAdd user={user} /> : ""
+            }
+            <QuestionsAnswersDetails user={user} />
           </Paper>
         </div>
         </React.Fragment>

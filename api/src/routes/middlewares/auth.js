@@ -11,7 +11,7 @@ let authMiddleware = function (request, response, next) {
   let token = request.body.token || request.query.token || request.headers['x-access-token'] || request.cookies.token
 
   if (token && token != 'null') {
-    request.user = jwt.verify(t, config.secret)
+    request.user = jwt.verify(token, config.secret)
   } else {
     request.user = {}
   }

@@ -10,9 +10,11 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 import Collapse from "@material-ui/core/Collapse";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import StarBorder from "@material-ui/icons/StarBorder";
+import moment from 'moment';
 
 
 import Grid from '@material-ui/core/Grid';
+import MyQuestions from '../profile/my-questions';
 
 
 
@@ -33,7 +35,7 @@ class SimpleNestedListViewer extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      open: true
+      open: false
     };
   }
 
@@ -44,7 +46,7 @@ class SimpleNestedListViewer extends React.Component {
   render() {
 
     const { classes, containerTitle, allQuestionsAnswers, myQuestions  } = this.props;
-    const data = [];
+    const data = allQuestionsAnswers;
 
     return (
       <React.Fragment>
@@ -54,24 +56,42 @@ class SimpleNestedListViewer extends React.Component {
         <List disablePadding>
           {data.map(item => (
             <React.Fragment>
-              <ListItem className={classes.listItem} key={item.name}>
-                <ListItemText primary={item.name} secondary={item.desc} />
+              <ListItem
+                className={classes.listItem}
+                key={item._id}
+                dense
+                divider
+              >
+                <ListItemText
+                  primary={'Question: ' + item.question}
+                  secondary={'Created by user: '+item.user.username}
+                />
+                <ListItemText
+                  primary={'Created on:' + item.created}
+                  secondary={"Collapse to see answers"}
+                />
+                <Typography variant="body2">
+                  {"Likes:" + item.likes}
+                </Typography>
                 {this.state.open ? <ExpandLess /> : <ExpandMore />}
-                <Typography variant="body2">{item.price}</Typography>
               </ListItem>
               <Collapse in={this.state.open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                  <ListItem button className={classes.nested}>
-                    <ListItemIcon>
-                      <StarBorder />
-                    </ListItemIcon>
-                    <ListItemText inset primary="Starred" />
-                  </ListItem>
+                  {item.answers.map(answer => (
+                    <ListItem
+                      button
+                      className={classes.nested}
+                      dense
+                      divider
+                    >
+                      <ListItemText inset primary={answer.answer} />
+                      <ListItemText inset primary={answer.user} />
+                    </ListItem>
+                  ))}
                 </List>
               </Collapse>
             </React.Fragment>
           ))}
-
         </List>
       </React.Fragment>
     );

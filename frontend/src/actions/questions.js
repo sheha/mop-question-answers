@@ -155,7 +155,7 @@ export function postQuestion (question) {
   const token = localStorage.getItem('token')
 
   return dispatch => {
-    return fetch(`${ config.url.api }question/add`, {
+    return fetch(`${ config.url.api }questions/add`, {
       method: 'post',
 
       body: JSON.stringify(question),

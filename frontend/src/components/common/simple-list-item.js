@@ -8,7 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 import Divider from '@material-ui/core/Divider';
 
-import HelpOutline from '@material-ui/icons/HelpOutline';
+import HelpOutline from '@material-ui/icons/Help';
 
 const styles = theme => ({
   root: {
@@ -32,20 +32,37 @@ class SimpleListItem extends React.Component {
   // todo : collapsable
 
   render() {
-    const { classes, question, user, created, mostActiveUser } = this.props;
-
+    const { classes, question, created, mostActiveUser } = this.props;
 
     return (
-      <React.Fragment>
-        <ListItem variant="inset">
-          <Avatar>
-            <HelpOutline />
-          </Avatar>
-          <ListItemText primary={mostActiveUser} secondary={created} />
-        </ListItem>
-        <Divider variant="inset" />
-      </React.Fragment>
-    );
+      (question && created ?
+        <React.Fragment>
+          <ListItem variant="inset" divider dense>
+            <Avatar>
+              <HelpOutline>Help</HelpOutline>
+            </Avatar>
+            <ListItemText
+              primary={question}
+              secondary={created}
+            />
+          </ListItem>
+          <Divider variant="inset" />
+        </React.Fragment>
+        :
+          <React.Fragment>
+            <ListItem variant="inset" divider dense>
+              <Avatar>
+                <HelpOutline>Help</HelpOutline>
+              </Avatar>
+              <ListItemText
+                primary={mostActiveUser}
+              />
+            </ListItem>
+            <Divider variant="inset" />
+          </React.Fragment>)
+        )
+
+    ;
   }
 }
 

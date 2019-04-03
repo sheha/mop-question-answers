@@ -26,14 +26,13 @@ function SimpleExpansionPanel(props) {
   const { classes, latestQuestions, hotQuestions, label, mostActiveUsers } = props;
 
 
-  // const latestQuestionsDisplay =
-  //   latestQuestions.map(({ _id, question, answers, created, user }) => (
-  //     <SimpleListItem
-  //       key={_id}
-  //       question={question}
-  //       created={created}
-  //       user={user}
-  //     />)) || [];
+  const latestQuestionsDisplay =
+    latestQuestions && latestQuestions.map(({ _id, question, answers, created }) => (
+      <SimpleListItem
+        key={_id}
+        question={question}
+        created={created}
+      />));
 
 
   return (
@@ -44,7 +43,7 @@ function SimpleExpansionPanel(props) {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <List className={classes.root}>
-            {/* {latestQuestionsDisplay} */}
+            {latestQuestionsDisplay}
 
 
             {/* {hotQuestions &&
